@@ -43,7 +43,7 @@
       const header=document.createElement("header");header.className="guide-header";
       const home=document.createElement("a");home.href="#main";home.setAttribute("aria-label","맨 위로");
       home.innerHTML='<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><path d="M2 15 16 2l14 13-3 3L16 8 5 18Zm5 2 9-8 9 8v13h-7v-9h-4v9H7Z" fill="currentColor"/></svg>';
-      const title=document.createElement("h1");title.id="title-"+diagram.id;title.textContent='워플로지 “AI 인문 사회 디자인”';
+      const title=document.createElement("h1");title.id="title-"+diagram.id;title.textContent='워플로지 "AI 인문 사회 디자인"';
       const mobileNote=document.createElement("p");mobileNote.className="guide-mobile-note";
       mobileNote.textContent="PC에서는 캔버스 조작, 모바일에서는 재생만 가능합니다.";
       header.append(mobileNote,home,title);
