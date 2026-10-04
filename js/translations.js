@@ -1,4 +1,7 @@
 window.WORFLOGY_EN = {
+  "AI 리스크·정책 페이지 오픈": "Introducing AI Risk & Policy",
+  "사건에서 정책까지, Gap 대응 글로벌 커뮤니티": "From incidents to policy: a global community bridging the gaps",
+  "AI 리스크·정책 살펴보기": "Explore AI Risk & Policy",
   "W3C 표준 준수 강화 버전": "Enhanced W3C standards compliance",
   "W3C 온톨로지 기술 표준을 체험하고, 기술 형식 활용의 한계를 알아보세요.": "Explore W3C ontology standards and understand the limits of applying their technical formats.",
   "서사 구조 이해 온톨로지 엔진": "An ontology engine for understanding narrative structure",
