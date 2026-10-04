@@ -8,3 +8,9 @@
 @media(max-width:760px){.site-updates{position:relative;z-index:91;left:auto;right:auto;top:auto;bottom:auto;width:auto;max-width:none;max-height:none;margin:16px;box-shadow:var(--shadow-control)}.updates-reopen{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:12px 18px 0}}
 
 .site-updates .updates-subtitle{margin:0 0 8px;color:var(--color-text);font-size:13px;font-weight:600;line-height:1.5}
+
+@media(max-width:480px){
+ .site-updates{margin:12px;max-height:60dvh;overflow:auto;overscroll-behavior:contain}
+ .updates-heading{position:sticky;top:0;z-index:1;background:var(--color-white)}
+ .site-updates article{padding:16px}.updates-heading button,.updates-footer button,.updates-action{font-size:14px}
+}

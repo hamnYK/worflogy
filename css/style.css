@@ -204,3 +204,14 @@ footer{padding-bottom:calc(var(--space-16) + 96px)}
 
 /* Public privacy notice, shared semantic design tokens. */
 .site-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}.site-footer .privacy-policy-link{display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-body);font-size:14px;color:var(--color-text);text-decoration:underline;text-underline-offset:3px}.site-footer .privacy-policy-link:hover{color:var(--color-action)}.site-footer .privacy-policy-link:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+
+/* Phone baseline: Samsung A51/A71, 412 × 914 CSS pixels. */
+@media(max-width:480px){
+ .floating-actions{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));flex-direction:row;gap:8px;max-width:none}
+ .floating-actions>*{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;white-space:normal;text-align:center;font-size:14px}
+ .floating-actions :is(.workshop-floating,.contexton-floating){padding:8px;min-height:48px}
+ body{padding-bottom:80px} .site-header,main,footer{padding-inline:16px}
+ .toolbar{gap:8px}.canvas-caption{font-size:12px;line-height:1.6}.diagram-heading{flex-wrap:wrap}
+ .company-info>div{grid-template-columns:minmax(0,100px) minmax(0,1fr)}
+ input:not([type=checkbox]):not([type=radio]),textarea,select{font-size:16px;max-width:100%}
+}
