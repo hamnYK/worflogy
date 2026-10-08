@@ -9,8 +9,8 @@
       if (!activeScene) return;
       activeScene.input.enabled = !mobileInput.matches;
       activeScene.pan = null;
-      activeScene.game.canvas.style.pointerEvents = mobileInput.matches ? "none" : "auto";
-      activeScene.game.canvas.style.touchAction = mobileInput.matches ? "auto" : "none";
+      activeScene.game.canvas.classList.toggle("diagram-touch-scroll", mobileInput.matches);
+      activeScene.game.canvas.classList.add("diagram-input-canvas");
     };
     mobileInput.addEventListener("change", syncInput);
     let pending;
@@ -145,10 +145,10 @@
           const x=(n.x+66-camera.scrollX-camera.width/2)*z+camera.width/2;
           const y=(n.y-24-camera.scrollY-camera.height/2)*z+camera.height/2;
           // Render text at native CSS resolution; avoid scaling a rasterized text layer.
-          label.style.transform="translate("+Math.round(x)+"px,"+Math.round(y)+"px)";
-          label.style.width=Math.max(170,200*z)+"px";
-          label.style.fontSize=Math.max(14,17*z)+"px";
-          label.style.opacity=this.widgets.get(id)?.alpha??1;
+          label.style.setProperty("--label-x",Math.round(x)+"px");label.style.setProperty("--label-y",Math.round(y)+"px");
+          label.style.setProperty("--label-width",Math.max(170,200*z)+"px");
+          label.style.setProperty("--label-font-size",Math.max(14,17*z)+"px");
+          label.style.setProperty("--label-opacity",this.widgets.get(id)?.alpha??1);
         });
       }
       drawIcon(n) {return window.WorfArt.draw(this,n);}

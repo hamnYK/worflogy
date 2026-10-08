@@ -1,31 +1,31 @@
 /* Pebble territory shares the arcade controls and contextual status layout. */
-.pebble-score{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:var(--space-3);font-weight:var(--font-weight-semibold)}
-.pebble-you{color:#187465}.pebble-ai{color:#a54d36}
+.pebble-score{display:flex;align-items:center;justify-content:space-between;gap:var(--worf-foundation-space-8px);margin-bottom:var(--space-3);font-weight:var(--font-weight-semibold)}
+.pebble-you{color:var(--worf-foundation-color-187465)}.pebble-ai{color:var(--worf-foundation-color-a54d36)}
 .pebble-turn{font-size:var(--font-size-xs);color:var(--color-text-muted)}
 .pebble-aim{width:110px;accent-color:var(--color-action)}
 .pebble-game .chip-controls output{min-width:36px;font-variant-numeric:tabular-nums}
-@media(max-width:650px){.pebble-game .chip-game-heading h2{font-size:20px}.pebble-game .chip-controls label{flex:1 1 42%}.pebble-game .chip-controls input{width:80px}.pebble-score{font-size:13px}.pebble-turn{font-size:11px}}
+@media(max-width:650px){.pebble-game .chip-game-heading h2{font-size:var(--worf-foundation-type-20px)}.pebble-game .chip-controls label{flex:1 1 42%}.pebble-game .chip-controls input{width:80px}.pebble-score{font-size:var(--worf-foundation-type-13px)}.pebble-turn{font-size:var(--worf-foundation-type-11px)}}
 /* Transparent display surfaces are scoped to the hidden arcade. */
 .section-elevator .arcade-open{position:absolute;top:calc(100% + var(--space-4));left:-1px;width:76px;min-height:var(--space-16);border:1px solid var(--color-border-input);border-radius:var(--radius-control);background:var(--color-white);box-shadow:var(--shadow-floating);color:var(--color-action)}
 /* Center the visible elevator + OPEN bounds without changing the markup. */
 @media(min-width:1000px) and (min-height:600px){
  .section-elevator:has(.arcade-open){transform:translateY(calc(-50% - (var(--space-4) + var(--space-16) - 1px) / 2))}
 }
-.coin-arcade{--glass-ink:#dffbf3;position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;color:var(--glass-ink);background:#17333a;overflow:auto;font-family:var(--font-body)}
+.coin-arcade{--glass-ink:var(--worf-foundation-color-dffbf3);position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;color:var(--glass-ink);background:var(--worf-foundation-color-17333a);overflow:auto;font-family:var(--font-body)}
 .coin-arcade::backdrop{background:var(--color-overlay)}.coin-arcade *{box-sizing:border-box}
-.coin-arcade button{font:inherit;cursor:pointer}.coin-arcade button:focus-visible,.coin-arcade canvas:focus-visible{outline:3px solid #d4ff96;outline-offset:5px}
-.arcade-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 40%,#1b987b30,transparent 55%),radial-gradient(ellipse at 90% 80%,#5671c428,transparent 55%),repeating-linear-gradient(0deg,transparent 0 3px,#afffe903 3px 4px)}
-.arcade-shell{position:relative;max-width:1160px;min-height:100%;margin:auto;padding:28px 48px;display:flex;flex-direction:column}
-.arcade-header,.arcade-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:11px;letter-spacing:2px;color:#a0beb9}
-.coin-arcade .arcade-close,.coin-arcade .game-back,.coin-arcade .game-reset{border:1px solid #88d7c54d;background:#ffffff08;color:#dffbf3;padding:10px 16px;border-radius:5px;min-height:44px;letter-spacing:0}
-.arcade-content{flex:1;padding:40px 0}.arcade-intro{text-align:center;margin-bottom:36px}.arcade-eyebrow{color:#b6f894;font-size:11px;letter-spacing:4px;margin:0 0 16px}
-.coin-arcade h2{color:inherit;margin:0;font-size:clamp(24px,3vw,38px);line-height:1.3}.arcade-intro>p:last-child{color:#9abdb5;font-size:14px;margin:16px 0}
+.coin-arcade button{font:inherit;cursor:pointer}.coin-arcade button:focus-visible,.coin-arcade canvas:focus-visible{outline:3px solid var(--worf-foundation-color-d4ff96);outline-offset:5px}
+.arcade-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 40%,var(--worf-foundation-color-1b987b30),transparent 55%),radial-gradient(ellipse at 90% 80%,var(--worf-foundation-color-5671c428),transparent 55%),repeating-linear-gradient(0deg,transparent 0 3px,var(--worf-foundation-color-afffe903) 3px 4px)}
+.arcade-shell{position:relative;max-width:1160px;min-height:100%;margin:auto;padding:var(--worf-foundation-space-28px) var(--worf-foundation-space-48px);display:flex;flex-direction:column}
+.arcade-header,.arcade-footer{display:flex;justify-content:space-between;align-items:center;gap:var(--worf-foundation-space-20px);font-size:var(--worf-foundation-type-11px);letter-spacing:2px;color:var(--worf-foundation-color-a0beb9)}
+.coin-arcade .arcade-close,.coin-arcade .game-back,.coin-arcade .game-reset{border:1px solid var(--worf-foundation-color-88d7c54d);background:var(--worf-foundation-color-ffffff08);color:var(--worf-foundation-color-dffbf3);padding:var(--worf-foundation-space-10px) var(--worf-foundation-space-16px);border-radius:var(--worf-foundation-radius-5px);min-height:44px;letter-spacing:0}
+.arcade-content{flex:1;padding:var(--worf-foundation-space-40px) 0}.arcade-intro{text-align:center;margin-bottom:var(--worf-foundation-space-36px)}.arcade-eyebrow{color:var(--worf-foundation-color-b6f894);font-size:var(--worf-foundation-type-11px);letter-spacing:4px;margin:0 0 var(--worf-foundation-space-16px)}
+.coin-arcade h2{color:inherit;margin:0;font-size:clamp(var(--worf-foundation-type-24px),3vw,var(--worf-foundation-type-38px));line-height:1.3}.arcade-intro>p:last-child{color:var(--worf-foundation-color-9abdb5);font-size:var(--worf-foundation-type-14px);margin:var(--worf-foundation-space-16px) 0}
 .arcade-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));align-items:stretch;gap:var(--space-4);width:100%;margin:auto}
 
-.arcade-footer{padding-top:18px;border-top:1px solid #aaffdf20;letter-spacing:1px}.game-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}.coin-arcade .game-heading h2{font-size:22px}.game-score{font-size:13px;color:#ccffa3;white-space:nowrap}.game-help,.game-keyboard{font-size:13px;color:#a5c9bd;line-height:1.7}.coin-pitch{display:block;width:100%;aspect-ratio:900/560;object-fit:contain;border:1px solid #73d9b955;border-radius:8px;touch-action:none;background:#092b30}.game-bottom{display:flex;gap:16px;justify-content:space-between;align-items:center}.game-status{font-size:14px;line-height:1.6;color:#d4f2bf;flex:1}.game-reset{flex-shrink:0}.game-keyboard{font-size:11px}
-.arcade-doors{position:fixed;inset:0;z-index:10;pointer-events:none;overflow:hidden}.arcade-door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;background:var(--color-white,#fff);transition:transform 1s cubic-bezier(.65,0,.2,1);box-shadow:0 0 50px #0008}.arcade-door.left{left:0;border-right:1px solid #b9fff8}.arcade-door.right{right:0;border-left:1px solid #b9fff8}.arcade-page{position:absolute;left:0;color:var(--color-text);background:var(--color-white,#fff);pointer-events:none}.right .arcade-page{left:-50vw}.opened .left{transform:translateX(-101%)}.opened .right{transform:translateX(101%)}
-@media(max-width:999px),(max-height:599px){.section-elevator{display:flex;position:fixed;right:12px;top:45%;z-index:90;padding:4px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-white)}.section-elevator>button:not(.arcade-open),.section-elevator>output{display:none}.section-elevator .arcade-open{position:static;display:flex;flex-direction:column;align-items:center;gap:4px;width:auto;border:0;min-height:48px;font-size:11px;background:transparent;box-shadow:none}}
-@media(max-width:650px){.arcade-shell{padding:20px}.arcade-content{padding:28px 0}.arcade-header{font-size:9px;letter-spacing:1px}.arcade-footer{font-size:9px;align-items:flex-start}.game-heading{flex-wrap:wrap}.coin-arcade .game-heading h2{font-size:18px}.coin-pitch{max-height:none}.game-bottom{align-items:flex-start}.game-status{font-size:12px}}
+.arcade-footer{padding-top:var(--worf-foundation-space-18px);border-top:1px solid var(--worf-foundation-color-aaffdf20);letter-spacing:1px}.game-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--worf-foundation-space-16px)}.coin-arcade .game-heading h2{font-size:var(--worf-foundation-type-22px)}.game-score{font-size:var(--worf-foundation-type-13px);color:var(--worf-foundation-color-ccffa3);white-space:nowrap}.game-help,.game-keyboard{font-size:var(--worf-foundation-type-13px);color:var(--worf-foundation-color-a5c9bd);line-height:1.7}.coin-pitch{display:block;width:100%;aspect-ratio:900/560;object-fit:contain;border:1px solid var(--worf-foundation-color-73d9b955);border-radius:var(--worf-foundation-radius-8px);touch-action:none;background:var(--worf-foundation-color-092b30)}.game-bottom{display:flex;gap:var(--worf-foundation-space-16px);justify-content:space-between;align-items:center}.game-status{font-size:var(--worf-foundation-type-14px);line-height:1.6;color:var(--worf-foundation-color-d4f2bf);flex:1}.game-reset{flex-shrink:0}.game-keyboard{font-size:var(--worf-foundation-type-11px)}
+.arcade-doors{position:fixed;inset:0;z-index:10;pointer-events:none;overflow:hidden}.arcade-door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;background:var(--color-white,var(--worf-foundation-color-ffffff));transition:transform 1s cubic-bezier(.65,0,.2,1);box-shadow:0 0 50px var(--worf-foundation-color-00000088)}.arcade-door.left{left:0;border-right:1px solid var(--worf-foundation-color-b9fff8)}.arcade-door.right{right:0;border-left:1px solid var(--worf-foundation-color-b9fff8)}.arcade-page{position:absolute;left:0;color:var(--color-text);background:var(--color-white,var(--worf-foundation-color-ffffff));pointer-events:none}.right .arcade-page{left:-50vw}.opened .left{transform:translateX(-101%)}.opened .right{transform:translateX(101%)}
+@media(max-width:999px),(max-height:599px){.section-elevator{display:flex;position:fixed;right:12px;top:45%;z-index:90;padding:var(--worf-foundation-space-4px);border:1px solid var(--color-border);border-radius:var(--worf-foundation-radius-8px);background:var(--color-white)}.section-elevator>button:not(.arcade-open),.section-elevator>output{display:none}.section-elevator .arcade-open{position:static;display:flex;flex-direction:column;align-items:center;gap:var(--worf-foundation-space-4px);width:auto;border:0;min-height:48px;font-size:var(--worf-foundation-type-11px);background:transparent;box-shadow:none}}
+@media(max-width:650px){.arcade-shell{padding:var(--worf-foundation-space-20px)}.arcade-content{padding:var(--worf-foundation-space-28px) 0}.arcade-header{font-size:var(--worf-foundation-type-9px);letter-spacing:1px}.arcade-footer{font-size:var(--worf-foundation-type-9px);align-items:flex-start}.game-heading{flex-wrap:wrap}.coin-arcade .game-heading h2{font-size:var(--worf-foundation-type-18px)}.coin-pitch{max-height:none}.game-bottom{align-items:flex-start}.game-status{font-size:var(--worf-foundation-type-12px)}}
 @media(prefers-reduced-motion:reduce){.arcade-door{transition:none}}
 
 /* Elevator door control: shared design-system states and motion. */
@@ -49,14 +49,14 @@
 @media(max-width:650px){.arcade-header{min-height:100px;align-items:flex-end;justify-content:center}}
 
 /* Wordmark at the top; reserve bottom space for the close control. */
-.coin-arcade .arcade-shell{padding-top:var(--space-4);padding-bottom:calc(var(--space-16) + var(--space-8) + env(safe-area-inset-bottom,0px))}
+.coin-arcade .arcade-shell{padding-top:var(--space-4);padding-bottom:calc(var(--space-16) + var(--space-8) + env(safe-area-inset-bottom,var(--worf-foundation-space-0px)))}
 .coin-arcade .arcade-header{min-height:0;justify-content:center;align-items:center;text-align:center}
 
 /* Fine reflections on the see-through display overlooking the mountain valley. */
-.coin-arcade .arcade-glow{position:fixed;box-shadow:inset 0 0 0 1px #c5fff438;background:linear-gradient(115deg,transparent 12%,#d0fff509 32%,transparent 46%,#d8eaff0d 77%,transparent 90%),repeating-linear-gradient(0deg,transparent 0 3px,#afffe905 3px 4px)}
+.coin-arcade .arcade-glow{position:fixed;box-shadow:inset 0 0 0 1px var(--worf-foundation-color-c5fff438);background:linear-gradient(115deg,transparent 12%,var(--worf-foundation-color-d0fff509) 32%,transparent 46%,var(--worf-foundation-color-d8eaff0d) 77%,transparent 90%),repeating-linear-gradient(0deg,transparent 0 3px,var(--worf-foundation-color-afffe905) 3px 4px)}
 .coin-arcade .arcade-header{font-family:var(--font-display-en);font-size:var(--font-size-heading);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);letter-spacing:normal;color:var(--color-text-muted);text-shadow:none}
 .coin-arcade .arcade-wordmark{max-width:100%;overflow-wrap:anywhere;padding:var(--space-2) 0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--color-on-media);text-shadow:var(--shadow-media-text);-webkit-text-stroke:var(--media-text-stroke);paint-order:stroke fill}
-.coin-arcade .game-help,.coin-arcade .game-keyboard{color:var(--glass-ink);text-shadow:0 1px 4px #06171c}
+.coin-arcade .game-help,.coin-arcade .game-keyboard{color:var(--glass-ink);text-shadow:0 1px 4px var(--worf-foundation-color-06171c)}
 
 /* Card presentation is shared in components.css; only layout lives here. */
 
@@ -82,7 +82,7 @@
 .chip-status{margin:var(--space-3) 0;font-size:var(--font-size-ui);font-weight:var(--font-weight-semibold);line-height:var(--line-height-body)}
 .chip-help,.chip-rules{font-size:var(--font-size-xs);color:var(--color-text-muted);line-height:var(--line-height-body)}
 .chip-rules summary{cursor:pointer;min-height:var(--control-height-touch);display:list-item;padding-top:var(--space-2)}
-.chip-result{position:absolute;inset:0;display:none;align-items:center;justify-content:center;pointer-events:none;background:var(--color-overlay);color:var(--color-white);font-family:var(--font-display-en);font-size:clamp(48px,9vw,100px);font-weight:var(--font-weight-bold);letter-spacing:.06em}
+.chip-result{position:absolute;inset:0;display:none;align-items:center;justify-content:center;pointer-events:none;background:var(--color-overlay);color:var(--color-white);font-family:var(--font-display-en);font-size:clamp(var(--worf-foundation-type-48px),9vw,var(--worf-foundation-type-100px));font-weight:var(--font-weight-bold);letter-spacing:.06em}
 .chip-result.show{display:flex}
 @media(max-width:650px){.coin-arcade .chip-game{padding:var(--space-2)}.chip-viewport{height:420px}.chip-camera button{padding:var(--space-1) var(--space-2)}.chip-game-heading{gap:var(--space-2)}.coin-arcade .chip-game h2{font-size:var(--font-size-heading)}}
 
@@ -101,10 +101,10 @@
 
 
 
-.chip-result-perfect{font-size:clamp(20px,4vw,52px);letter-spacing:.02em;text-align:center;padding:var(--space-4)}
+.chip-result-perfect{font-size:clamp(var(--worf-foundation-type-20px),4vw,var(--worf-foundation-type-52px));letter-spacing:.02em;text-align:center;padding:var(--space-4)}
 
 .basket-results{flex-direction:column;gap:var(--space-3);text-align:center;letter-spacing:normal;padding:var(--space-4);font-size:var(--font-size-heading)}
-.basket-results strong{font-size:clamp(40px,7vw,72px)}
+.basket-results strong{font-size:clamp(var(--worf-foundation-type-40px),7vw,var(--worf-foundation-type-72px))}
 .basket-results small{font-family:var(--font-body);font-size:var(--font-size-ui)}
 
 .chip-controls label[hidden]{display:none}
@@ -128,46 +128,46 @@
 .coin-arcade .arcade-mute:focus-visible{outline:var(--glass-card-focus-ring);outline-offset:var(--focus-offset)}
 
 /* Paper-and-pencil triangle territory. Native buttons support touch and keys. */
-.triangle-score{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 16px;font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
-.triangle-score strong{font-size:24px;margin-left:8px;font-variant-numeric:tabular-nums}
-.triangle-you{color:#116e65}.triangle-ai{color:#a64f3c}.triangle-turn{font-size:var(--font-size-xs);text-align:center;color:var(--color-text-muted)}
-.triangle-board{position:relative;isolation:isolate;aspect-ratio:1000/510;background:repeating-linear-gradient(0deg,transparent 0 31px,#69899916 31px 32px),#faf6e9;border:1px solid #d2c9b5;border-radius:var(--radius-card);overflow:hidden;box-shadow:inset 0 0 35px #90734612}
+.triangle-score{display:flex;align-items:center;justify-content:space-between;gap:var(--worf-foundation-space-12px);padding:var(--worf-foundation-space-8px) 0 var(--worf-foundation-space-16px);font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
+.triangle-score strong{font-size:var(--worf-foundation-type-24px);margin-left:var(--worf-foundation-space-8px);font-variant-numeric:tabular-nums}
+.triangle-you{color:var(--worf-foundation-color-116e65)}.triangle-ai{color:var(--worf-foundation-color-a64f3c)}.triangle-turn{font-size:var(--font-size-xs);text-align:center;color:var(--color-text-muted)}
+.triangle-board{position:relative;isolation:isolate;aspect-ratio:1000/510;background:repeating-linear-gradient(0deg,transparent 0 31px,var(--worf-foundation-color-69899916) 31px 32px),var(--worf-foundation-color-faf6e9);border:1px solid var(--worf-foundation-color-d2c9b5);border-radius:var(--radius-card);overflow:hidden;box-shadow:inset 0 0 35px var(--worf-foundation-color-90734612)}
 .triangle-board svg,.triangle-dots{position:absolute;inset:0;width:100%;height:100%}
 .triangle-board svg{pointer-events:none}
-.triangle-lines line{stroke:#3c494d;stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.triangle-lines .triangle-last-edge{stroke:#8f6a19;stroke-width:3.5}
-.triangle-owned-you{fill:#57b9a766}.triangle-owned-ai{fill:#e391706b}
-.triangle-owner-label{font:600 18px var(--font-body);fill:#35484b;pointer-events:none}
-.coin-arcade .triangle-game .triangle-dot{position:absolute;transform:translate(-50%,-50%);width:36px;height:36px;min-height:36px;padding:0 0 20px;border:0;border-radius:50%;background:transparent;color:#4b575a;font-size:10px;line-height:16px;touch-action:manipulation;opacity:1}
-.triangle-dot::after{content:'';position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:#36484e;transform:translate(-50%,-50%);box-shadow:0 0 0 3px #faf6e9}
-.coin-arcade .triangle-game .triangle-dot:hover:not(:disabled){background:#116e6519}
-.coin-arcade .triangle-game .triangle-dot[aria-pressed="true"]{background:#116e6533;box-shadow:0 0 0 2px #116e65}
-.triangle-dot[aria-pressed="true"]::after{background:#116e65}
-.triangle-dot.triangle-available::after{background:#116e65;box-shadow:0 0 0 3px #faf6e9,0 0 0 5px #116e6555}
-.coin-arcade .triangle-game .triangle-dot:focus-visible{outline:3px solid #116e65;outline-offset:1px}
+.triangle-lines line{stroke:var(--worf-foundation-color-3c494d);stroke-width:2.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.triangle-lines .triangle-last-edge{stroke:var(--worf-foundation-color-8f6a19);stroke-width:3.5}
+.triangle-owned-you{fill:var(--worf-foundation-color-57b9a766)}.triangle-owned-ai{fill:var(--worf-foundation-color-e391706b)}
+.triangle-owner-label{font:600 var(--worf-foundation-type-18px) var(--font-body);fill:var(--worf-foundation-color-35484b);pointer-events:none}
+.coin-arcade .triangle-game .triangle-dot{position:absolute;transform:translate(-50%,-50%);width:36px;height:36px;min-height:36px;padding:0 0 var(--worf-foundation-space-20px);border:0;border-radius:50%;background:transparent;color:var(--worf-foundation-color-4b575a);font-size:var(--worf-foundation-type-10px);line-height:16px;touch-action:manipulation;opacity:1}
+.triangle-dot::after{content:'';position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:var(--worf-foundation-color-36484e);transform:translate(-50%,-50%);box-shadow:0 0 0 3px var(--worf-foundation-color-faf6e9)}
+.coin-arcade .triangle-game .triangle-dot:hover:not(:disabled){background:var(--worf-foundation-color-116e6519)}
+.coin-arcade .triangle-game .triangle-dot[aria-pressed="true"]{background:var(--worf-foundation-color-116e6533);box-shadow:0 0 0 2px var(--worf-foundation-color-116e65)}
+.triangle-dot[aria-pressed="true"]::after{background:var(--worf-foundation-color-116e65)}
+.triangle-dot.triangle-available::after{background:var(--worf-foundation-color-116e65);box-shadow:0 0 0 3px var(--worf-foundation-color-faf6e9),0 0 0 5px var(--worf-foundation-color-116e6555)}
+.coin-arcade .triangle-game .triangle-dot:focus-visible{outline:3px solid var(--worf-foundation-color-116e65);outline-offset:1px}
 .triangle-count{font-size:var(--font-size-xs);color:var(--color-text-muted);line-height:1.7}
 .triangle-game .chip-status{min-height:2.8em}
 .triangle-board{max-width:900px;margin-inline:auto}
-@media(max-width:650px){.triangle-owner-label{font-size:28px}}
-@media(max-width:650px){.triangle-board{aspect-ratio:1000/720}.triangle-score{gap:6px}.triangle-score strong{font-size:20px}.triangle-game .chip-game-heading h2{font-size:20px}.triangle-game .chip-controls{justify-content:space-between}}
+@media(max-width:650px){.triangle-owner-label{font-size:var(--worf-foundation-type-28px)}}
+@media(max-width:650px){.triangle-board{aspect-ratio:1000/720}.triangle-score{gap:var(--worf-foundation-space-6px)}.triangle-score strong{font-size:var(--worf-foundation-type-20px)}.triangle-game .chip-game-heading h2{font-size:var(--worf-foundation-type-20px)}.triangle-game .chip-controls{justify-content:space-between}}
 .triangle-table-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.triangle-3d{max-width:none;border-color:#49605c;background:#233b43;box-shadow:var(--shadow-floating);aspect-ratio:1000/550}
+.triangle-3d{max-width:none;border-color:var(--worf-foundation-color-49605c);background:var(--worf-foundation-color-233b43);box-shadow:var(--shadow-floating);aspect-ratio:1000/550}
 .triangle-3d>svg{visibility:hidden}
 .triangle-3d{touch-action:none;cursor:grab}
 .triangle-3d.triangle-dragging{cursor:grabbing}
 .triangle-camera{z-index:3;cursor:default;flex-wrap:wrap;max-width:calc(100% - 16px)}
 .coin-arcade .triangle-game .triangle-dot[hidden]{display:none}
-.coin-arcade .triangle-game .triangle-3d .triangle-dot{color:#334b45;padding:0 0 20px;font-size:10px}
-.triangle-3d .triangle-dot::after{display:block;width:6px;height:6px;background:#2e423d;box-shadow:none}
-.coin-arcade .triangle-game .triangle-3d .triangle-dot.triangle-available{box-shadow:inset 0 0 0 1px #18735a66}
+.coin-arcade .triangle-game .triangle-3d .triangle-dot{color:var(--worf-foundation-color-334b45);padding:0 0 var(--worf-foundation-space-20px);font-size:var(--worf-foundation-type-10px)}
+.triangle-3d .triangle-dot::after{display:block;width:6px;height:6px;background:var(--worf-foundation-color-2e423d);box-shadow:none}
+.coin-arcade .triangle-game .triangle-3d .triangle-dot.triangle-available{box-shadow:inset 0 0 0 1px var(--worf-foundation-color-18735a66)}
 @media(max-width:650px){.triangle-3d{aspect-ratio:1/.92}.coin-arcade .triangle-game .triangle-3d .triangle-dot{width:30px;height:30px;min-height:30px}}
 
 /* Desk themes are confined to the play surface; shared glass cards stay unchanged. */
-.triangle-board[data-desk-theme="eastern"]:not(.triangle-3d){background:repeating-linear-gradient(12deg,#79816b08 0 1px,transparent 1px 7px),#f0eddf;border-color:#7f8c78}
-.triangle-board[data-desk-theme="western"]:not(.triangle-3d){background:#ead9b1;border:3px double #92703d}
-.triangle-board[data-desk-theme="eastern"] .triangle-lines line{stroke:#303b35}
-.triangle-board[data-desk-theme="eastern"] .triangle-lines .triangle-last-edge{stroke:#a04d38}
-.triangle-board[data-desk-theme="western"] .triangle-lines line{stroke:#4b4030}
+.triangle-board[data-desk-theme="eastern"]:not(.triangle-3d){background:repeating-linear-gradient(12deg,var(--worf-foundation-color-79816b08) 0 1px,transparent 1px 7px),var(--worf-foundation-color-f0eddf);border-color:var(--worf-foundation-color-7f8c78)}
+.triangle-board[data-desk-theme="western"]:not(.triangle-3d){background:var(--worf-foundation-color-ead9b1);border:3px double var(--worf-foundation-color-92703d)}
+.triangle-board[data-desk-theme="eastern"] .triangle-lines line{stroke:var(--worf-foundation-color-303b35)}
+.triangle-board[data-desk-theme="eastern"] .triangle-lines .triangle-last-edge{stroke:var(--worf-foundation-color-a04d38)}
+.triangle-board[data-desk-theme="western"] .triangle-lines line{stroke:var(--worf-foundation-color-4b4030)}
 
 /* Canvas 12: plain, centered elevator hint over the existing video. */
 .null-sector-stage{position:relative;isolation:isolate}
@@ -200,20 +200,20 @@
 .coin-arcade .null-sector-card .arcade-null-sector-play:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
 
 /* Pocket Plush follows the shared arcade shell and touch controls. */
-.claw-caption{position:absolute;left:20px;top:16px;color:#eee3c9;font:600 10px var(--font-body);letter-spacing:2px;pointer-events:none}
-.claw-caption span{display:block;margin-top:6px;font-size:8px;letter-spacing:1px;opacity:.65}
-.claw-directions{display:flex;gap:6px}
+.claw-caption{position:absolute;left:20px;top:16px;color:var(--worf-foundation-color-eee3c9);font:600 var(--worf-foundation-type-10px) var(--font-body);letter-spacing:2px;pointer-events:none}
+.claw-caption span{display:block;margin-top:var(--worf-foundation-space-6px);font-size:var(--worf-foundation-type-8px);letter-spacing:1px;opacity:.65}
+.claw-directions{display:flex;gap:var(--worf-foundation-space-6px)}
 .claw-directions button{min-width:44px;touch-action:none}
 .claw-collection{display:flex;flex-wrap:wrap;gap:var(--space-2)}
 .claw-collection:empty{display:none}
-.claw-collection span{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:12px}
-.claw-collection span:before{content:'';width:12px;height:12px;border-radius:50%;background:var(--plush-color);box-shadow:inset 0 -2px 2px #0002}
-@media(max-width:650px){.claw-game .chip-viewport{height:400px}.claw-caption{left:12px;top:12px;font-size:8px}.claw-game .chip-controls{gap:8px}.claw-game .claw-grab{flex:1}}
+.claw-collection span{display:inline-flex;align-items:center;gap:var(--worf-foundation-space-7px);padding:var(--worf-foundation-space-6px) var(--worf-foundation-space-10px);border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:var(--worf-foundation-type-12px)}
+.claw-collection span:before{content:'';width:12px;height:12px;border-radius:50%;background:var(--plush-color);box-shadow:inset 0 -2px 2px var(--worf-foundation-color-00000022)}
+@media(max-width:650px){.claw-game .chip-viewport{height:400px}.claw-caption{left:12px;top:12px;font-size:var(--worf-foundation-type-8px)}.claw-game .chip-controls{gap:var(--worf-foundation-space-8px)}.claw-game .claw-grab{flex:1}}
 
 .claw-game .chip-camera{flex-wrap:wrap;justify-content:flex-end;max-width:calc(100% - 16px)}
 .claw-game .chip-camera button{min-width:36px}
 
-.claw-turns{display:flex;align-items:center;gap:6px;font-size:12px}.claw-turns button{padding-inline:10px}
+.claw-turns{display:flex;align-items:center;gap:var(--worf-foundation-space-6px);font-size:var(--worf-foundation-type-12px)}.claw-turns button{padding-inline:var(--worf-foundation-space-10px)}
 
 /* Touch actions are real buttons; desktop keyboard and direct dragging remain available. */
 .arcade-touch-controls{display:none}
@@ -248,10 +248,28 @@
 @media(max-width:760px){
  .coin-arcade.arcade-playing .arcade-close{position:absolute;left:auto;right:0;top:0;bottom:auto;transform:none;width:var(--space-16);min-height:var(--space-16)}
  .coin-arcade.arcade-playing .arcade-header{padding-left:0;padding-right:calc(var(--space-16) + var(--space-3));min-height:var(--space-16);text-align:left;justify-content:flex-start}
- .coin-arcade.arcade-playing .arcade-shell{padding-bottom:calc(var(--space-4) + env(safe-area-inset-bottom,0px))}
+ .coin-arcade.arcade-playing .arcade-shell{padding-bottom:calc(var(--space-4) + env(safe-area-inset-bottom,var(--worf-foundation-space-0px)))}
  .coin-arcade.arcade-playing .arcade-content{padding-top:var(--space-4)}
  .null-sector-player-bar{flex-wrap:wrap;gap:var(--space-1);padding:var(--space-2)}
  .null-sector-player-bar strong{font-size:var(--font-size-ui)}
  .null-sector-player-bar button{min-height:var(--control-height-touch)}
  .coin-arcade.null-sector-active .arcade-shell{padding:0}
 }
+
+.chip-result.chip-result-above-table{z-index:4}.triangle-dot{left:var(--dot-left);top:var(--dot-top)}
+body.arcade-scroll-locked,body.privacy-scroll-locked{overflow:hidden}
+.arcade-page{width:var(--page-width);top:var(--page-top)}
+
+.basketball-needle-centered{transform:translateX(0)}
+
+.sound-hidden{display:none}
+
+.plush-kind-0{--plush-color:var(--worf-foundation-color-dd9bb1)}
+.plush-kind-1{--plush-color:var(--worf-foundation-color-d4ad6f)}
+.plush-kind-2{--plush-color:var(--worf-foundation-color-8fbead)}
+.plush-kind-3{--plush-color:var(--worf-foundation-color-a798cd)}
+.plush-kind-4{--plush-color:var(--worf-foundation-color-e2d8c5)}
+.plush-kind-5{--plush-color:var(--worf-foundation-color-83acc5)}
+.plush-kind-6{--plush-color:var(--worf-foundation-color-e4c574)}
+.plush-kind-7{--plush-color:var(--worf-foundation-color-b6c3cd)}
+.plush-kind-8{--plush-color:var(--worf-foundation-color-dca2a1)}

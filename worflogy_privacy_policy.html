@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link rel="stylesheet" href="css/foundation.css">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>주식회사 워플로지 개인정보 처리방침</title>
@@ -20,7 +21,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: #fff;
+      background: var(--worf-foundation-color-ffffff);
       color: var(--text);
       line-height: 1.75;
       font-family: var(--font-body);
@@ -29,40 +30,40 @@
     main {
       width: min(900px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 52px 0 80px;
+      padding: var(--worf-foundation-space-52px) 0 var(--worf-foundation-space-80px);
     }
-    h1, h2 { color: var(--accent); line-height: 1.4; }
-    h1 { font-size: 2rem; margin: 0 0 8px; }
+    h1, h2 { font-family: var(--font-display); color: var(--accent); line-height: 1.4; }
+    h1 { font-size: var(--worf-foundation-type-2rem); margin: 0 0 var(--worf-foundation-space-8px); }
     h2 {
-      font-size: 1.22rem;
-      margin: 38px 0 14px;
-      padding-top: 10px;
+      font-size: var(--worf-foundation-type-1-22rem);
+      margin: var(--worf-foundation-space-38px) 0 var(--worf-foundation-space-14px);
+      padding-top: var(--worf-foundation-space-10px);
       border-top: 1px solid var(--line);
     }
-    p { margin: 9px 0; }
-    ul { padding-left: 1.35rem; }
-    li { margin: 5px 0; }
+    p { margin: var(--worf-foundation-space-9px) 0; }
+    ul { padding-left: var(--worf-foundation-space-1-35rem); }
+    li { margin: var(--worf-foundation-space-5px) 0; }
     a { color: var(--color-action); text-underline-offset: 3px; }
     a:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
-    .back-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 24px; }
+    .back-link { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: var(--worf-foundation-space-24px); }
     h1, h2 { font-family: var(--font-heading, var(--font-body)); }
     td { overflow-wrap: anywhere; }
-    .meta { color: var(--muted); margin-bottom: 24px; }
+    .meta { color: var(--muted); margin-bottom: var(--worf-foundation-space-24px); }
     .intro {
       background: var(--soft);
       border: 1px solid var(--line);
       border-radius: var(--radius-card);
-      padding: 18px 20px;
+      padding: var(--worf-foundation-space-18px) var(--worf-foundation-space-20px);
     }
     .contact {
       width: 100%;
       border-collapse: collapse;
-      margin: 14px 0;
-      font-size: .95rem;
+      margin: var(--worf-foundation-space-14px) 0;
+      font-size: var(--worf-foundation-type-95rem);
     }
     .contact th, .contact td {
       border: 1px solid var(--line);
-      padding: 11px 13px;
+      padding: var(--worf-foundation-space-11px) var(--worf-foundation-space-13px);
       text-align: left;
       vertical-align: top;
     }
@@ -71,18 +72,18 @@
       background: var(--soft);
     }
     footer {
-      margin-top: 48px;
-      padding-top: 20px;
+      margin-top: var(--worf-foundation-space-48px);
+      padding-top: var(--worf-foundation-space-20px);
       border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: .9rem;
+      font-size: var(--worf-foundation-type-9rem);
     }
     @media (max-width: 720px) {
-      main { width: min(100% - 24px, 900px); padding-top: 30px; }
-      .contact { font-size: .9rem; }
-      .contact th, .contact td { padding: 9px; }
+      main { width: min(100% - 24px, 900px); padding-top: var(--worf-foundation-space-30px); }
+      .contact { font-size: var(--worf-foundation-type-9rem); }
+      .contact th, .contact td { padding: var(--worf-foundation-space-9px); }
     }
-  .privacy-embedded .back-link,.privacy-embedded footer{display:none}.privacy-embedded main{padding-top:24px;padding-bottom:32px}
+  .privacy-embedded .back-link,.privacy-embedded footer{display:none}.privacy-embedded main{padding-top:var(--worf-foundation-space-24px);padding-bottom:var(--worf-foundation-space-32px)}
   </style>
 </head>
 <body>

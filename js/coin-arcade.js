@@ -33,8 +33,8 @@ function musicLabel(){
  button.setAttribute('aria-pressed',String(music.muted));
  button.setAttribute('aria-label',musicBlocked?t('배경 음악 재생','Play background music'):t('배경 음악 음소거','Mute background music'));
  button.title=musicBlocked?t('배경 음악 재생','Play background music'):music.muted?t('음소거 해제','Unmute'):t('음소거','Mute');
- button.querySelector('.sound-waves').style.display=music.muted||musicBlocked?'none':'';
- button.querySelector('.sound-off').style.display=music.muted||musicBlocked?'':'none';
+ button.querySelector('.sound-waves').classList.toggle('sound-hidden',music.muted||musicBlocked);
+ button.querySelector('.sound-off').classList.toggle('sound-hidden',!(music.muted||musicBlocked));
 }
 function syncMusic(){
  musicLabel();
@@ -74,7 +74,7 @@ function label(){trigger.lastChild.textContent='OPEN';trigger.setAttribute('aria
 label();new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 function open(){
  closing=false;
- oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
+ oldOverflow=document.body.classList.contains('arcade-scroll-locked');document.body.classList.add('arcade-scroll-locked');
  dialog.innerHTML='<video class="arcade-background-video" src="./assets/images/hidden-bg.mp4" muted loop playsinline preload="auto" inert disablepictureinpicture></video><div class="arcade-glow"></div><div class="arcade-shell"><header class="arcade-header"><button type="button" class="arcade-mute wf-button wf-button--glass" aria-label="Mute background music" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><g class="sound-waves"><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></g><path class="sound-off" d="m16 9 5 6m0-6-5 6"/></svg></button><span class="arcade-wordmark">WORFLOGY | AFTER HOURS</span><button type="button" class="arcade-close wf-button" autofocus aria-label="Close elevator doors"><span aria-hidden="true">▶ | ◀</span><span>CLOSE</span></button></header><div class="arcade-content"></div></div>';
  watchBackground(dialog.querySelector('.arcade-background-video'));
  dialog.querySelector('.arcade-mute').onclick=()=>{
@@ -91,7 +91,7 @@ function createDoors(){
  const doors=document.createElement('div');doors.className='arcade-doors';doors.setAttribute('aria-hidden','true');doors.inert=true;
  for(let side=0;side<2;side++){
  const panel=document.createElement('div');panel.className='arcade-door '+(side?'right':'left');
- const page=document.createElement('div');page.className='arcade-page';page.style.cssText='width:'+innerWidth+'px;top:'+(-scrollY)+'px';
+ const page=document.createElement('div');page.className='arcade-page';page.style.setProperty('--page-width',innerWidth+'px');page.style.setProperty('--page-top',(-scrollY)+'px');
  for(const child of [...document.body.children]){
  if(child===dialog||['SCRIPT','DIALOG'].includes(child.tagName))continue;
  const clone=child.cloneNode(true);clone.querySelectorAll('script,iframe').forEach(n=>n.remove());
@@ -118,7 +118,7 @@ function closeDoors(){
 }
 trigger.onclick=open;
 dialog.addEventListener('cancel',e=>{e.preventDefault();closeDoors();});
-dialog.addEventListener('close',()=>{syncBackground();syncMusic();stopGame();clearTimeout(doorTimer);document.body.style.overflow=oldOverflow;dialog.querySelectorAll('.arcade-doors').forEach(node=>node.remove());closing=false;trigger.focus({preventScroll:true});});
+dialog.addEventListener('close',()=>{syncBackground();syncMusic();stopGame();clearTimeout(doorTimer);document.body.classList.toggle('arcade-scroll-locked',oldOverflow);dialog.querySelectorAll('.arcade-doors').forEach(node=>node.remove());closing=false;trigger.focus({preventScroll:true});});
 window.addEventListener('null-sector-registered',()=>{if(dialog.open&&inLobby&&!closing)lobby();});
 function lobby(){
  dialog.classList.remove('arcade-playing');dialog.scrollTop=0;
@@ -176,6 +176,7 @@ async function start(kind='football'){
   gameHandle=handle;return;
  }
  const games=await loadFootball();
+ if(document.fonts){const type=getComputedStyle(document.documentElement);await Promise.all(['--font-body','--font-display-ko','--font-display-en'].map(token=>document.fonts.load('700 24px '+type.getPropertyValue(token),'가 ABC 012 " \u0027'))).catch(()=>{});}
  if(generation!==gameGeneration||!dialog.open||closing)return;
  gameHandle=(kind==='claw'?games.mountClawMachine:kind==='boxes'?games.mountDotsAndBoxes:kind==='pebble'?games.mountPebbleTerritory:kind==='triangle'?games.mountTriangleTerritory:kind==='ping'?games.mountChalkboardPingPong:kind==='eraser'?games.mountEraserWrestling:kind==='book-flip'?games.mountBookFlip:kind==='curling'?games.mountCurling:kind==='basketball'?games.mountBasketball:games.mountFootball)(host,{onExit:lobby,onWin:lobby,english:en()});
  }catch(error){
