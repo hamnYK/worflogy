@@ -666,3 +666,31 @@
   --worf-foundation-type-9px: 9px;
   --worf-foundation-type-9rem: .9rem;
 }
+
+/* Workshop light-palette reference colors. */
+:root {
+  --worf-foundation-color-243b7c: #243b7c;
+  --worf-foundation-color-0367b0: #0367b0;
+  --worf-foundation-color-3c3463: #3c3463;
+  --worf-foundation-color-6f6f6f: #6f6f6f;
+  --worf-foundation-color-101f3c: #101f3c;
+  --worf-foundation-color-175ce6: #175ce6;
+  --worf-foundation-color-596b83: #596b83;
+  --worf-foundation-color-dde4ef: #dde4ef;
+  --worf-foundation-color-e6efff: #e6efff;
+  --worf-foundation-color-edf1f7: #edf1f7;
+  --worf-foundation-color-1046b7: #1046b7;
+  --worf-foundation-color-f2c567: #f2c567;
+  --worf-foundation-color-263247: #263247;
+  --worf-foundation-color-344e73: #344e73;
+  --worf-foundation-color-536170: #536170;
+  --worf-foundation-color-61707a: #61707a;
+  --worf-foundation-color-aeb6c0: #aeb6c0;
+  --worf-foundation-color-e4eaf1: #e4eaf1;
+  --worf-foundation-color-edece6: #edece6;
+  --worf-foundation-color-faf9f3: #faf9f3;
+  --worf-foundation-color-263e50: #263e50;
+  --worf-foundation-color-416783: #416783;
+  --worf-foundation-color-795799: #795799;
+  --worf-foundation-color-ad7935: #ad7935;
+}
