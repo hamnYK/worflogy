@@ -96,8 +96,8 @@
     if(!url)return;
     document.querySelector('link[rel="canonical"]').href=url;
     document.querySelector('meta[property="og:url"]').content=url;
-    document.querySelector('meta[property="og:locale"]').content=language==="ko"?"ko_KR":"en_US";
-    document.querySelector('meta[property="og:locale:alternate"]').content=language==="ko"?"en_US":"ko_KR";
+    document.querySelector('meta[property="og:locale"]').content=language==="ko"?"ko_KR":"en_GB";
+    document.querySelector('meta[property="og:locale:alternate"]').content=language==="ko"?"en_GB":"ko_KR";
     const data=document.getElementById("page-structured-data");
     const schema=JSON.parse(data.textContent);
     const page=schema["@graph"].find(item=>item["@type"]==="WebPage");
