@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawResearchObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawResearchObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 window.createResearchStory=function(scene){
  return window.createProblemStory(scene,{
  draw:window.drawResearchObject,
@@ -24,13 +24,13 @@ window.createResearchStory=function(scene){
  switch(key){
  case "infrastructure":focus(["api","rag","agent"]);flow("api","agent",BLUE);flow("api","rag",BLUE);break;
  case "topic":focus(["start","core","feedback"]);flow("start","core");flow("start","feedback");break;
- case "draft":state.drafted=true;focus(["core"]);render("core");break;
- case "purchase":state.purchased=true;focus(["core","alternative"]);flow("core","alternative",GOLD);flow("alternative","core",GOLD);render("alternative");break;
+ case "draft":state.drafted=true;focus(["core"]);animate(p=>{state.draftProgress=p;render("core");});break;
+ case "purchase":state.purchased=true;focus(["core","alternative"]);flow("core","alternative",GOLD);flow("alternative","core",GOLD);render("alternative");animate(p=>{state.purchaseProgress=p;render("core");});break;
  case "sell":state.sold=true;focus(["core","chosen"]);flow("core","chosen");render("chosen");break;
  case "discourse":state.discourse=true;focus(["chosen","report"]);flow("chosen","report");render("report");break;
  case "analysis":focus(["report","review"]);flow("report","review");animate(p=>{state.analysisProgress=p;render("review");});break;
  case "suggestions":state.suggested=true;focus(["review","feedback"]);flow("review","feedback");render("feedback");break;
- case "evolve":state.designRevision=1;focus(["feedback","core"]);flow("feedback","core",GOLD);render("core");break;
+ case "evolve":focus(["feedback","core"]);flow("feedback","core",GOLD);animate(p=>{state.designRevision=p;render("core");});break;
  case "record":focus(["core","alternative","chosen","report","review","feedback","logic","knowledge"]);flow("logic","knowledge");animate(p=>{state.knowledgeNodes=Math.floor(18*p);render("knowledge");});break;
  case "ontology":focus(["knowledge","rag","agent"]);flow("knowledge","rag",GOLD);animate(p=>{state.engineRevision=p>.5?2:0;render("rag");});break;
  }

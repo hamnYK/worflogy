@@ -3,7 +3,7 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawPlatformObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawPlatformObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 
 window.platformEdgePath=function(scene,edge){
  const get=id=>id==="logic"?{...scene.project(scene.diagram.group.x+scene.diagram.group.w+12,240),w:1,h:1}:scene.nodes.get(id);
@@ -12,18 +12,22 @@ window.platformEdgePath=function(scene,edge){
  const plane=n=>({x:((n.x-580)/.82+(n.y-30)/.43)/2,y:((n.y-30)/.43-(n.x-580)/.82)/2});
  const ap=plane(a),bp=plane(b);
  let bends=[];
- if(edge.kind==="context"){
+ if(edge.kind==="diagnosis"){
+   // Keep the report-to-engine route inside the process floor, clear of the agent.
+   const rail=scene.diagram.group.y+scene.diagram.group.h-window.WorfRouteSpacing.diagnosisInset;
+   bends=[scene.project(ap.x,rail),scene.project(bp.x,rail)];
+ }else if(edge.kind==="context"){
    const infra=scene.diagram.nodes.filter(n=>n.type==="engine"||n.type==="agent").map(n=>plane(get(n.id)));
-   const rail=Math.max(...infra.map(n=>n.y))+110,outer=ap.x+140;
+   const rail=Math.max(...infra.map(n=>n.y))+window.WorfRouteSpacing.contextGap,outer=ap.x+window.WorfRouteSpacing.contextOutset;
    bends=[scene.project(outer,ap.y),scene.project(outer,rail),scene.project(bp.x,rail)];
  }else if(edge.kind==="learning"){
    const infra=scene.diagram.nodes.filter(n=>n.type==="engine"||n.type==="agent").map(n=>plane(get(n.id)));
-   const rail=Math.max(...infra.map(n=>n.y))+150;
+   const rail=Math.max(...infra.map(n=>n.y))+window.WorfRouteSpacing.learningGap;
    // One shared return rail, with distinct branches to the three infrastructure objects.
    const xs=[ap.x,...infra.map(n=>n.x)].filter(x=>x>=Math.min(ap.x,bp.x)&&x<=Math.max(ap.x,bp.x)).sort((x,y)=>ap.x>bp.x?y-x:x-y);
    bends=[...xs.map(x=>scene.project(x,rail))];
  }else if(edge.both&&edge.kind==="infrastructure"){
-   const rail=Math.max(ap.y,bp.y)+80;
+   const rail=Math.max(ap.y,bp.y)+window.WorfRouteSpacing.infrastructureGap;
    bends=[scene.project(ap.x,rail),scene.project(bp.x,rail)];
  }
  const first=bends[0]||b,last=bends.at(-1)||a;
@@ -34,8 +38,10 @@ window.drawPlatformConnections=function(scene,graphic){
  const segments=new Map(),arrows=[];
  for(const e of scene.diagram.edges){
   const points=window.platformEdgePath(scene,e);if(points.length<2)continue;
-  const active=!scene.selected||e.from===scene.selected||e.to===scene.selected||(scene.platformHighlights?.has(e.from)&&scene.platformHighlights?.has(e.to));
-  const alpha=scene.storyRunning&&!(scene.visited.has(e.from)&&scene.visited.has(e.to))?.07:(active?.82:.13);
+  const active=scene.storyRunning
+   ?!!(scene.storyFlowEdges?.has(e.from+'>'+e.to)||(e.both&&scene.storyFlowEdges?.has(e.to+'>'+e.from)))
+   :!scene.selected||e.from===scene.selected||e.to===scene.selected;
+  const alpha=active?.82:scene.storyRunning&&!(scene.visited.has(e.from)&&scene.visited.has(e.to))?.07:.13;
   const color=e.kind==="context"?window.WorfTheme.active:e.kind==="learning"?window.WorfTheme.flow:e.kind==="infrastructure"?window.WorfTheme.link:window.WorfTheme.link;
   const dashed=e.kind==="infrastructure";
   for(let i=1;i<points.length;i++){
@@ -61,7 +67,7 @@ window.drawPlatformConnections=function(scene,graphic){
 window.createPlatformStory=function(scene){
  const state={assigned:false,monitorReady:false,matched:false,guided:false,reports:0,monitored:0,knowledgeNodes:0,engineRevision:0,cycles:0,eventsSeen:[]};
  const layers=new Map(),tweens=[],particles=[];
- let settle=null;
+ const timeline=window.createStoryTimeline(scene);
  const steps=[
  ["meet","agent","사용자 인터페이스","에이전트와 대화하며 업무 상황을 전달하고 필요한 안내를 받습니다.",3340],
  ["infrastructure","agent","기술 인프라","업무 수행을 진단하는 엔진과 프로세스 정책을 안내하는 엔진이 함께 에이전트를 지원합니다.",4185],
@@ -80,23 +86,22 @@ window.createPlatformStory=function(scene){
  ["close-loop","knowledge","경험에서 인프라로","업무 경험이 엔진을 성장시키고, 성장한 엔진이 다음 업무를 지원하는 순환이 이어집니다.",4120]
  ];
  function render(id){
-   layers.get(id)?.destroy();scene.widgets.get(id).list[1].setVisible(false);
-   const graphic=window.drawPlatformObject(scene,scene.nodes.get(id),state);scene.widgets.get(id).add(graphic);layers.set(id,graphic);
+   if(timeline.render(id,()=>render(id)))return;
+   const previous=layers.get(id),widget=scene.widgets.get(id);widget.list[1].setVisible(false);
+   const graphic=window.drawPlatformObject(scene,scene.nodes.get(id),state,previous);if(graphic!==previous){previous?.destroy();widget.add(graphic);layers.set(id,graphic);}
  }
- function animate(draw,duration=1800){
-   settle=()=>draw(1);
-   tweens.push(scene.tweens.addCounter({from:0,to:1,duration,onUpdate:t=>draw(t.getValue()),onComplete:()=>{settle=null;}}));
- }
+ function animate(draw){timeline.animate(draw); }
  function point(id){if(id==="logic")return scene.project(scene.diagram.group.x+scene.diagram.group.w+12,240);return scene.nodes.get(id);}
- function flow(from,to,color=INK){
+ function flow(from,to,color=INK){timeline.flow(from,to,(delay,duration)=>emitFlow(from,to,color,delay,duration));}
+ function emitFlow(from,to,color,delay,duration){
    const edge=scene.diagram.edges.find(e=>e.from===from&&e.to===to)||{from,to};
    const route=window.platformEdgePath(scene,edge);
    if(route.length<2)return;
    const lengths=route.slice(1).map((p,i)=>Math.hypot(p.x-route[i].x,p.y-route[i].y));
    const total=lengths.reduce((a,b)=>a+b,0);
    for(let i=0;i<3;i++){
-     const p=scene.add.circle(route[0].x,route[0].y,3.5,color).setDepth(1900);particles.push(p);
-     tweens.push(scene.tweens.addCounter({from:0,to:total,delay:i*160,duration:1400,onUpdate:t=>{
+     const p=scene.add.circle(route[0].x,route[0].y,3.5,color).setDepth(1900).setAlpha(0);particles.push(p);
+     tweens.push(scene.tweens.addCounter({from:0,to:total,delay:delay+i*window.WorfMotion.workflow.packetStagger,duration,onStart:()=>p.setAlpha(1),onUpdate:t=>{
        let distance=t.getValue(),segment=0;
        while(segment<lengths.length-1&&distance>lengths[segment])distance-=lengths[segment++];
        const a=route[segment],b=route[segment+1],ratio=Math.min(1,distance/(lengths[segment]||1));
@@ -108,11 +113,11 @@ window.createPlatformStory=function(scene){
  function storeExperience(count){state.knowledgeNodes=count;render("knowledge");}
  function finishStep(){
    tweens.splice(0).forEach(t=>t.stop());
-   if(settle){const end=settle;settle=null;end();}
+   timeline.finish();
    particles.splice(0).forEach(p=>p.destroy());
  }
  function step(key){
-   finishStep();
+   finishStep();timeline.begin();
    const [,id,speaker,text,duration]=steps.find(s=>s[0]===key);
    focus([id,"agent"]);scene.select(id);
    switch(key){
@@ -138,7 +143,8 @@ window.createPlatformStory=function(scene){
     case "report":
       state.reports=1;focus(["guide","report"]);flow("guide","report");render("report");break;
     case "diagnose":
-      focus(["report","competency","agent"]);render("competency");flow("competency","agent",BLUE);break;
+      focus(["report","competency","agent"]);flow("report","competency",GOLD);flow("competency","agent",BLUE);
+      animate(p=>{state.diagnosisProgress=p;render("competency");});break;
     case "monitor":
       state.monitored=1;state.cycles=1;focus(["report","growth"]);flow("report","growth");render("growth");break;
     case "accumulate":
@@ -146,7 +152,7 @@ window.createPlatformStory=function(scene){
       animate(p=>storeExperience(Math.floor(p*12)),2300);break;
     case "learn":
       focus(["knowledge","competency","policy","agent"]);["competency","policy"].forEach(target=>flow("knowledge",target,GOLD));flow("knowledge","agent",window.WorfTheme.active);
-      animate(p=>{state.engineRevision=p>=.5?1:0;["competency","policy","agent"].forEach(render);},2200);break;
+      animate(p=>{state.engineRevision=p>=.5?1:0;["competency","policy","agent"].forEach(render);});break;
     case "repeat":
       focus(["events","guide","position","policy","agent"]);flow("events","guide",GOLD);flow("position","guide");render("guide");break;
     case "next-report":
@@ -157,7 +163,7 @@ window.createPlatformStory=function(scene){
       focus(["knowledge","competency","policy","agent"]);["competency","policy"].forEach(target=>flow("knowledge",target,GOLD));flow("knowledge","agent",window.WorfTheme.active);
       state.engineRevision=2;["competency","policy","agent"].forEach(render);break;
    }
-   return {focus:id,speaker,text,duration};
+   const visualDuration=timeline.flush();return {focus:id,speaker,text,duration:Math.max(duration,visualDuration+200)};
  }
  return {stages:steps.map(([key])=>({type:"platform",key})),step,finishStep,stats:()=>({...state,eventsSeen:[...state.eventsSeen]}),
  destroy(){finishStep();layers.forEach(g=>g.destroy());layers.clear();scene.platformHighlights=null;}};
@@ -174,6 +180,7 @@ window.drawContextConnection=function(scene,graphic,edge){
  graphic.fillStyle(window.WorfTheme.active,alpha);graphic.fillTriangle(b.x,b.y,b.x-9*Math.cos(t-.4),b.y-9*Math.sin(t-.4),b.x-9*Math.cos(t+.4),b.y-9*Math.sin(t+.4));
 };
 window.emitContextFlow=function(scene){
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
  const route=window.platformEdgePath(scene,{from:"knowledge",to:"agent",kind:"context"});
  const lengths=route.slice(1).map((p,i)=>Math.hypot(p.x-route[i].x,p.y-route[i].y)),total=lengths.reduce((a,b)=>a+b,0);
  for(let i=0;i<3;i++){

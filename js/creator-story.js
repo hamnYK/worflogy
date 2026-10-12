@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawCreatorObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawCreatorObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 window.createCreatorStory=function(scene){
  return window.createProblemStory(scene,{
  draw:window.drawCreatorObject,
@@ -24,13 +24,13 @@ window.createCreatorStory=function(scene){
  switch(key){
  case "infrastructure":focus(["content","api","incubation","rag","agent"]);flow("content","agent",BLUE);flow("api","content",BLUE);flow("api","incubation",BLUE);flow("incubation","rag",BLUE);break;
  case "developer":focus(["start","core"]);flow("start","core");break;
- case "targets":state.targetsSet=true;focus(["core"]);render("core");break;
- case "mentor":state.mentored=true;focus(["core","alternative"]);flow("core","alternative",GOLD);flow("alternative","core",GOLD);render("alternative");break;
+ case "targets":state.targetsSet=true;focus(["core"]);animate(p=>{state.targetProgress=p;render("core");});break;
+ case "mentor":state.mentored=true;focus(["core","alternative"]);flow("core","alternative",GOLD);flow("alternative","core",GOLD);render("alternative");animate(p=>{state.mentorProgress=p;render("core");});break;
  case "sdk":state.sdkReady=true;focus(["core","chosen"]);flow("core","chosen");render("chosen");break;
  case "collect":focus(["chosen","report"]);flow("chosen","report");animate(p=>{state.metricsCollected=Math.floor(p*5);render("report");});break;
  case "metrics":focus(["report","review"]);flow("report","review");animate(p=>{state.metricAnalysis=p;render("review");});break;
- case "guide-growth":state.guidanceReady=true;focus(["review","feedback"]);flow("review","feedback");render("feedback");break;
- case "reset-targets":state.targetRevision=1;focus(["feedback","core"]);flow("feedback","core",GOLD);render("core");break;
+ case "guide-growth":state.guidanceReady=true;focus(["review","feedback"]);flow("review","feedback");animate(p=>{state.guidanceProgress=p;render("feedback");});break;
+ case "reset-targets":focus(["feedback","core"]);flow("feedback","core",GOLD);animate(p=>{state.targetRevision=p;render("core");});break;
  case "record":focus(["core","alternative","chosen","report","review","feedback","logic","knowledge"]);flow("logic","knowledge");animate(p=>{state.knowledgeNodes=Math.floor(p*18);render("knowledge");});break;
  case "ontology":focus(["knowledge","incubation","rag","agent"]);flow("knowledge","incubation",GOLD);flow("knowledge","rag",GOLD);animate(p=>{state.engineRevision=p>.5?2:0;state.incubationRevision=state.engineRevision;render("incubation");render("rag");});break;
  }

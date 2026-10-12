@@ -73,18 +73,20 @@
       const technology=document.createElement("strong");technology.className="toolbar-technology";technology.textContent=diagram.technologyLabel;
       toolbar.append(technology);
       const video=document.createElement("video");video.className="diagram-canvas diagram-canvas--video";
-      video.muted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.preload="metadata";
+      video.muted=true;video.autoplay=false;video.loop=true;video.playsInline=true;video.preload="metadata";
       video.setAttribute("muted","");video.setAttribute("playsinline","");video.setAttribute("aria-label",diagram.title);
    video.setAttribute("disablepictureinpicture","");video.setAttribute("disableremoteplayback","");
    video.setAttribute("controlslist","nodownload nofullscreen noremoteplayback");video.setAttribute("inert","");
    video.src=diagram.video;
       shell.append(toolbar,video);section.append(shell);root.append(section);
       let visible=false;
-      const syncVideo=()=>{if(visible&&!document.hidden)video.play().catch(()=>{});else video.pause();};
+      const reducedVideo=matchMedia('(prefers-reduced-motion:reduce)');
+      const syncVideo=()=>{if(visible&&!document.hidden&&!reducedVideo.matches)video.play().catch(()=>{});else video.pause();};
       const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;syncVideo();});
       observer.observe(video);observers.push(observer);
       document.addEventListener("visibilitychange",syncVideo);
-      players.push({destroy(){video.pause();document.removeEventListener("visibilitychange",syncVideo);}});
+      reducedVideo.addEventListener("change",syncVideo);
+      players.push({destroy(){video.pause();document.removeEventListener("visibilitychange",syncVideo);reducedVideo.removeEventListener("change",syncVideo);}});
       return;
     }
     if(diagram.placeholder){

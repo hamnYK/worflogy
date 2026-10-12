@@ -8,12 +8,12 @@ const C={ink:window.WorfTheme.ink,dark:window.WorfTheme.dark,green:window.WorfTh
 function kit(g){
  const poly=(pts,color,alpha=1,stroke=null)=>{const p=pts.map(([x,y])=>({x,y}));g.fillStyle(color,alpha);g.fillPoints(p,true);if(stroke!==null){g.lineStyle(1.2,stroke,1);g.strokePoints(p,true);}};
  const line=(a,b,color=C.ink,w=2,alpha=1)=>{g.lineStyle(w,color,alpha);g.lineBetween(...a,...b);};
- const rr=(x,y,w,h,color=C.paper,r=5,stroke=null)=>{g.fillStyle(color,1);g.fillRoundedRect(x,y,w,h,r);if(stroke!==null){g.lineStyle(1.4,stroke,1);g.strokeRoundedRect(x,y,w,h,r);}};
+ const rr=(x,y,w,h,color=C.paper,r=5,stroke=null,alpha=1)=>{g.fillStyle(color,alpha);g.fillRoundedRect(x,y,w,h,r);if(stroke!==null){g.lineStyle(1.4,stroke,1);g.strokeRoundedRect(x,y,w,h,r);}};
  const dot=(x,y,r,color=C.ink)=>{g.fillStyle(color,1);g.fillCircle(x,y,r);};
  const ring=(x,y,r,color=C.blue,w=2,alpha=1)=>{g.lineStyle(w,color,alpha);g.strokeCircle(x,y,r);};
  const ellipse=(x,y,w,h,color,alpha=1)=>{g.fillStyle(color,alpha);g.fillEllipse(x,y,w,h);};
  const arc=(x,y,r,start,end,color=C.gold,w=2,alpha=1)=>{g.lineStyle(w,color,alpha);g.beginPath();g.arc(x,y,r,start,end);g.strokePath();};
- const arrow=(a,b,color=C.blue,w=2)=>{line(a,b,color,w);const t=Math.atan2(b[1]-a[1],b[0]-a[0]);poly([b,[b[0]-7*Math.cos(t-.45),b[1]-7*Math.sin(t-.45)],[b[0]-7*Math.cos(t+.45),b[1]-7*Math.sin(t+.45)]],color);};
+ const arrow=(a,b,color=C.blue,w=2)=>{line(a,b,color,w);const t=Math.atan2(b[1]-a[1],b[0]-a[0]),head=Math.min(7,Math.hypot(b[0]-a[0],b[1]-a[1])*.32);poly([b,[b[0]-head*Math.cos(t-.45),b[1]-head*Math.sin(t-.45)],[b[0]-head*Math.cos(t+.45),b[1]-head*Math.sin(t+.45)]],color);};
  const sphere=(x,y,r,color=C.green)=>{ellipse(x+1,y+2,r*2,r*1.7,C.shadow,.12);dot(x,y,r,color);dot(x-r*.27,y-r*.3,r*.32,C.white);};
  const check=(x,y,s=1)=>{line([x-7*s,y],[x-1*s,y+6*s],C.dark,2.8*s);line([x-1*s,y+6*s],[x+11*s,y-8*s],C.dark,2.8*s);};
  const badge=(x,y,kind="check")=>{dot(x+1,y+2,12,C.shadow);dot(x,y,12,C.gold);ring(x,y,9,C.cream,1);if(kind==="check")check(x,y,.65);else if(kind==="coin"){line([x,y-6],[x,y+6],C.paper,2);line([x-4,y-3],[x+4,y-3],C.paper,2);line([x-4,y+3],[x+4,y+3],C.paper,2);}else{line([x,y-6],[x,y+1],C.dark,2.5);dot(x,y+5,1.8,C.dark);}};
@@ -32,11 +32,11 @@ function kit(g){
   line([x-w/2+1,y-h],[x,y-h-d/2+1],C.white,1.2);
  };
  const paper=(x=0,y=-17,w=52,h=68)=>{
-  rr(x-w/2+4,y-h/2+5,w,h,C.edge,4);rr(x-w/2,y-h/2,w,h,C.paper,4,C.edge);
+  rr(x-w/2+3,y-h/2+4,w,h,C.shadow,4,null,.12);rr(x-w/2,y-h/2,w,h,C.paper,4,C.edge);
   poly([[x+w/2-14,y-h/2],[x+w/2,y-h/2+14],[x+w/2-14,y-h/2+14]],C.sky);
   line([x-w/2+10,y-h/2+15],[x+5,y-h/2+15],C.blue,3);
  };
- const rows=(x,y,w=28,count=3,color=C.edge)=>{for(let i=0;i<count;i++)line([x,y+i*9],[x+w-(i%2)*6,y+i*9],color,2);};
+ const rows=(x,y,w=28,count=3,color=C.blue)=>{for(let i=0;i<count;i++)line([x,y+i*9],[x+w-(i%2)*6,y+i*9],color,2,.7);};
  const person=(x,y,s=1,color=C.green)=>{
   ellipse(x+s,y+29*s,25*s,7*s,C.shadow,.12);
   line([x-5*s,y+18*s],[x-6*s,y+28*s],C.dark,3*s);line([x+5*s,y+18*s],[x+6*s,y+28*s],C.dark,3*s);
@@ -70,7 +70,7 @@ function kit(g){
   line([x-14*s,y-22*s],[x+7*s,y-22*s],C.white,1.6*s);
  };
  const bubble=(x,y,w=38,h=26,fill=C.paper)=>{
-  rr(x-w/2+2,y-h/2+3,w,h,C.edge,6);rr(x-w/2,y-h/2,w,h,fill,6,C.edge);
+  rr(x-w/2+2,y-h/2+3,w,h,C.shadow,6,null,.12);rr(x-w/2,y-h/2,w,h,fill,6,C.edge);
   poly([[x-8,y+h/2-1],[x-13,y+h/2+10],[x+3,y+h/2-1]],fill);
  };
  const screen=(x=0,y=-15,w=82,h=57)=>{
@@ -85,8 +85,8 @@ function kit(g){
   dot(x,y,r+3,C.navy);dot(x,y,r,C.sky);
   arc(x,y,r-4,3.6,5.0,C.white,2.5);
  };
- const gear=(x,y,r=18,color=C.blue)=>{
-  for(let i=0;i<8;i++){const t=i*Math.PI/4;line([x+Math.cos(t)*(r-3),y+Math.sin(t)*(r-3)],[x+Math.cos(t)*(r+4),y+Math.sin(t)*(r+4)],color,7);}
+ const gear=(x,y,r=18,color=C.blue,phase=0)=>{
+  for(let i=0;i<8;i++){const t=i*Math.PI/4+phase;line([x+Math.cos(t)*(r-3),y+Math.sin(t)*(r-3)],[x+Math.cos(t)*(r+4),y+Math.sin(t)*(r+4)],color,7);}
   dot(x,y,r,color);dot(x,y,r*.52,C.paper);ring(x,y,r*.3,color,2);
  };
  const bulb=(x,y,s=1)=>{
@@ -139,11 +139,13 @@ function paint(g,scene,node,state={}){
   pts.forEach((p,i)=>{if(i)line(pts[Math.floor((i-1)/2)],p,i>8?C.gold:C.blue,1.8,.85);if(i>5&&i%3===0)line(pts[i-3],p,C.green,1.2,.5);});
   pts.forEach((p,i)=>sphere(...p,i===0?6:4.2,i>8?C.gold:C.green));
  };
- const flowBoard=(type="tree",hot=false)=>{
+ const flowBoard=(type="tree",hot=false,revision=0)=>{
   screen(0,-22,88,66);
   const pts=type==="tree"?[[0,-43],[-23,-22],[23,-22],[-23,-5],[5,-5]]:[[-25,-26],[0,-42],[25,-26],[0,-9]];
   const edges=type==="tree"?[[0,1],[0,2],[1,3],[2,4]]:[[0,1],[1,2],[2,3],[3,0]];
-  edges.forEach(([a,b])=>arrow(pts[a],pts[b],hot?C.green:C.blue,1.7));
+  edges.forEach(([a,b])=>{if(type==="tree"&&revision>=1.5&&a===2&&b===4)return;arrow(pts[a],pts[b],hot?C.green:C.blue,1.7);});
+  if(type==="tree"&&revision>0)line(pts[1],[pts[1][0]+(pts[4][0]-pts[1][0])*Math.min(1,revision),pts[1][1]+(pts[4][1]-pts[1][1])*Math.min(1,revision)],C.gold,2.8);
+  if(type==="tree"&&revision>=1.5){arrow(pts[2],[24,-5],C.gold,2.8);rr(19,-10,10,10,C.gold,2,C.green);}
   pts.forEach(([x,y],i)=>{rr(x-5,y-5,10,10,hot&&i===2?C.gold:C.mint,2,C.green);});
  };
  const logCard=(mode="tasks",active=false)=>{
@@ -165,8 +167,16 @@ function paint(g,scene,node,state={}){
   for(let i=0;i<3;i++){rr(-23+i*18,0-(10+i*9)*active,10,(10+i*9)*active+1,i===2?C.gold:C.blue,2);}
   line([-25,-15],[-5,-32],C.green,2);line([-5,-32],[10,-25],C.green,2);arrow([10,-25],[29,-45],C.green,2);
  };
+ const goals=(revision=0,progress=1)=>{
+  // Goal markers move independently of the observed bars: resetting a target is not a performance gain.
+  [19,34,25].forEach((height,i)=>{const y=-(height+[-6,6,10][i]*revision),x=-26+i*18;line([x,y],[x+15*progress,y],C.gold,3);});
+ };
  const analysis=(type)=>{
-  if(type==="metrics"){trends(state.metricAnalysis??state.analysisProgress??1);lens(29,7,15);line([22,8],[28,1],C.gold,2);line([28,1],[34,5],C.gold,2);}
+  if(type==="metrics"){
+   trends(1);lens(29,7,15);line([22,8],[28,1],C.gold,2);line([28,1],[34,5],C.gold,2);
+   const p=state.metricAnalysis;
+   if(p!==undefined){if(p<1)line([-29,-43+44*p],[29,-43+44*p],C.gold,2);else [-18,0,18].forEach((x,i)=>ring(x,-10-i*9,4,C.gold,1.8));}
+  }
   else if(type==="decisions"){flowBoard("tree",state.decisionsAnalyzed);lens(28,8,17);arrow([20,7],[31,-1],C.gold,2);}
   else{if(type==="story")book(-8,-20);else paper(-9,-20,55,73);rows(-28,-28,31,3);if(state.analyzed||state.analysisProgress){line([-25,-28],[-1,-28],C.gold,4);line([-25,-10],[-6,-10],C.gold,4);}lens(25,10,18);line([17,9],[29,4],C.gold,2);}
  };
@@ -180,19 +190,24 @@ function paint(g,scene,node,state={}){
   poly([[-14,-20],[-23,5],[-13,2],[-2,-18]],C.blue);
   if(updated){arc(0,-34,16,3.4,6.0,C.gold,3);arrow([29,20],[29,-25],C.gold,3);sphere(-27,-9,4,C.gold);}
  };
- const world=()=>{
+ const world=(progress=1,revision=0)=>{
   slab(0,17,95,43,8,C.mint);
+  if(progress<=0)return;
   poly([[-43,10],[-23,-32],[-4,11]],C.blue);poly([[-23,-32],[-12,-7],[-30,-7]],C.paper);
-  cube(18,9,28,15,42,C.green);rr(11,-29,5,10,C.dark,1);rr(22,-29,5,10,C.dark,1);rr(15,-4,7,13,C.dark,2);
-  person(-3,2,.62,C.gold);sphere(35,-46,6,C.gold);
-  line([-30,19],[-16,10],C.paper,3);line([-16,10],[-3,16],C.paper,3);
-  if(state.narrativeRevision){arrow([10,29],[36,13],C.gold,2.5);}
+  if(progress>.25){const dx=8*revision,h=42*Math.min(1,(progress-.25)/.35);cube(18+dx,9,28,15,h,C.green);if(progress>.6){rr(11+dx,-29,5,10,C.dark,1);rr(22+dx,-29,5,10,C.dark,1);rr(15+dx,-4,7,13,C.dark,2);}}
+  if(progress>.6){line([-30,19],[-16,10],C.paper,3);line([-16,10],[-3-16*revision,16],revision?C.gold:C.paper,3);}
+  if(progress>.8){person(-3-16*revision,2,.62,C.gold);sphere(35,-46,6,C.gold);}
+  if(revision>0)arrow([-19,16],[18+8*revision,9],C.gold,2.5);
  };
 
  if(id==="agent"){robot(0,-21,1.05);bubble(34,-51,25,18,C.paper);[28,34,40].forEach(x=>dot(x,-52,1.8,C.green));return;}
  if(id==="knowledge"){graph(state.knowledgeNodes||0);return;}
  if(id==="rag"){engine(diagram==="narrative"?"world":diagram==="npc"?"thought":diagram==="bias"?"bias":"workflow");return;}
- if(id==="competency"||id==="policy"||id==="incubation"){engine(id);return;}
+ if(id==="competency"||id==="policy"||id==="incubation"){
+  engine(id);
+  if(id==="competency"&&state.diagnosisProgress!==undefined){const p=state.diagnosisProgress;paper(-43,-6,25,33);rows(-51,-13,14,2);if(p<1)line([-26,-38+37*p],[25,-38+37*p],C.gold,3);else badge(31,15);}
+  return;
+ }
  if(id==="content"){consoleGame();return;}
  if(id==="api"){
   cube(0,14,70,28,52,C.blue);
@@ -214,9 +229,15 @@ function paint(g,scene,node,state={}){
   }
   if(id==="linked"){
    const pts=[[0,-54],[-27,-27],[27,-27],[-37,6],[0,6],[37,6]],edges=[[0,1],[0,2],[1,3],[1,4],[2,4],[2,5],[3,4],[4,5]];
+   const progress=state.topProgress??1;
    slab(0,21,96,36,6,C.sky);
-   edges.forEach(([a,b],i)=>{if(i/edges.length<=(state.topProgress??1))line(pts[a],pts[b],C.blue,state.topStrength??2);});
-   pts.forEach((p,i)=>{if(i/6<=(state.topProgress??1)){cube(p[0],p[1]+5,15,9,11,C.blue);}});
+   // Playback operates on the existing structure; it must never dismantle it.
+   edges.forEach(([a,b],i)=>{
+    line(pts[a],pts[b],C.blue,state.topStrength??1);
+    const amount=progress*edges.length-i;
+    if(amount>0&&amount<1)line(pts[a],[pts[a][0]+(pts[b][0]-pts[a][0])*amount,pts[a][1]+(pts[b][1]-pts[a][1])*amount],C.gold,2.5);
+   });
+   pts.forEach(p=>cube(p[0],p[1]+5,15,9,11,C.blue));
    if((state.topStrength||0)>1){arc(0,-12,48,.15,2.8,C.gold,2);arrow([-45,0],[-43,-10],C.gold,2);}return;
   }
   if(id==="worflogy"){
@@ -234,11 +255,20 @@ function paint(g,scene,node,state={}){
   if(id==="holistic"){
    slab(-5,23,79,30,6,C.sky);ellipse(-9,-19,73,66,C.sky);
    g.lineStyle(1.5,C.blue,.7);g.strokeEllipse(-9,-19,73,66);g.strokeEllipse(-9,-19,32,66);g.strokeEllipse(-9,-19,73,24);
-   lens(20,5,21);sphere(16,0,4,C.green);line([16,0],[27,10],C.gold,2);sphere(27,10,3,C.gold);return;
+   lens(20,5,21*(1+.12*Math.sin((state.interpretProgress||0)*Math.PI)));sphere(16,0,4,C.green);line([16,0],[27,10],C.gold,2);sphere(27,10,3,C.gold);return;
   }
   if(id==="dynamics"){
-   slab(0,22,86,34,6,C.paper);gear(-16,-22,23,C.green);gear(24,4,17,C.blue);
-   arc(-5,-16,45,3.3,5.5,C.gold,2.5);arrow([25,-53],[35,-43],C.gold,2.5);return;
+   const phase=(state.dynamicsProgress??0)*Math.PI/2;
+   // Rotate teeth around each fixed axle, never the object or its supporting slab.
+   slab(0,22,86,34,6,C.paper);gear(-16,-22,23,C.green,phase);gear(24,4,17,C.blue,-phase);
+   arc(-5,-16,45,3.3,5.5,C.gold,2.5);arrow([25,-53],[35,-43],C.gold,2.5);
+   if(state.dynamicsProgress!==undefined){
+    arc(-5,-16,45,.16,2.7,C.gold,2.5,.55);
+    arrow([-45,6],[-49,-5],C.gold,2.5);
+    const t=3.3+state.dynamicsProgress*Math.PI*2;
+    sphere(-5+45*Math.cos(t),-16+45*Math.sin(t),3.5,C.gold);
+   }
+   return;
   }
   if(id==="signal"){
    slab(0,25,74,30,6,C.sky);cube(-10,13,33,20,33,C.green);
@@ -283,7 +313,7 @@ function paint(g,scene,node,state={}){
   screen(0,-19,92,72);
   rr(-31,-45,21,15,C.mint,2,C.green);rr(10,-45,21,15,C.sky,2,C.blue);arrow([-9,-37],[9,-37],C.blue,1.8);
   line([21,-28],[21,-22],C.gold,1.5);line([21,-22],[-20,-22],C.gold,1.5);arrow([-20,-22],[-20,-29],C.gold,1.5);
-  for(let j=0;j<3;j++){const pts=Array.from({length:15},(_,i)=>{const t=i/14;return [-30+t*60,-6+Math.sin(t*3+j*.2)*8+(j-1)*t*12];});pts.slice(1,Math.max(2,Math.floor((state.simulationProgress??.5)*15))).forEach((p,i)=>line(pts[i],p,j===1?C.gold:C.blue,j===1?2:1));}
+  for(let j=0;j<3;j++){const pts=Array.from({length:15},(_,i)=>{const t=i/14;return [-30+t*60,-6+Math.sin(t*3+j*.2)*8+(j-1)*t*12];});pts.slice(1,Math.max(1,Math.floor((state.simulationProgress??(state.storyStarted?0:.5))*15))).forEach((p,i)=>line(pts[i],p,j===1?C.gold:C.blue,j===1?2:1));}
   gear(33,22,12,C.green);return;
  }
  if(id==="start"){
@@ -310,15 +340,18 @@ function paint(g,scene,node,state={}){
    lens(27,13,16);return;
   }
   if(diagram==="research"){
-   paper(-6,-17,64,79);rows(-27,-37,33,2);
-   network([[-23,-8],[10,-15],[0,15]],[[0,1],[1,2]],C.green,4);
-   if(state.designRevision){sphere(34,8,4,C.gold);arrow([10,-15],[34,8],C.gold,2);}return;
+   const p=state.draftProgress??(state.storyStarted?0:1);
+   paper(-6,-17,64,79);for(let i=0;i<2;i++){const amount=Math.max(0,Math.min(1,p*4-i));if(amount)line([-27,-37+i*7],[-27+33*amount,-37+i*7],C.edge,2);}
+   const pts=[[-23,-8],[10,-15],[0,15]],count=Math.min(3,Math.floor(p*4));
+   network(pts.slice(0,count),[[0,1],[1,2]].filter(([a,b])=>b<count),C.green,4);
+   if(state.purchaseProgress){const q=state.purchaseProgress;line([-23,-8],[-23+23*q,-8+23*q],C.gold,2.5);}
+   if(state.designRevision){const q=state.designRevision;sphere(34,8,4,C.gold);line([10,-15],[10+24*q,-15+23*q],C.gold,2.5);}return;
   }
-  if(diagram==="narrative"){world();return;}
+  if(diagram==="narrative"){world(state.buildProgress??(state.storyStarted?0:1),.35*(state.editProgress||0)+(state.narrativeRevision||0));return;}
   if(diagram==="npc"){
-   flowBoard("tree",state.modelReady);gear(31,15,13,C.green);if(state.modelRevision)badge(-31,22);return;
+   flowBoard("tree",state.modelReady,state.modelRevision||0);gear(31,15,13,C.green);if(state.modelRevision>=1)badge(-31,22);return;
   }
-  if(diagram==="creator"){trends(state.targetsSet?1:.5);target(31,15,19);return;}
+  if(diagram==="creator"){trends(.7);if(state.targetsSet)goals((state.targetRevision||0)+.2*(state.mentorProgress||0),state.targetProgress??1);target(31,15,19);return;}
   if(diagram==="bias"){
    [-28,0,28].forEach((x,i)=>{rr(x-13+3,-42,26,60,C.edge,5);rr(x-13,-46,26,60,state.biasSelected&&i===1?C.cream:C.paper,5,C.edge);ring(x,-29,6,i===1?C.gold:C.blue,2);rows(x-7,-12,14,2);});
    if(state.biasSelected)badge(0,20);return;
@@ -341,11 +374,11 @@ function paint(g,scene,node,state={}){
   rows(-28,-30,34,4);
   line([-7,24],[33,-30],C.gold,8);line([33,-30],[38,-39],C.dark,4);
   poly([[-10,28],[-9,16],[-1,23]],C.dark);
-  if(diagram==="research")badge(-26,22,"coin");else if(state.edited)badge(-26,22);return;
+  if(diagram==="research"){if(state.purchased)badge(-26,22,"coin");}else if(state.edited)badge(-26,22);return;
  }
  if(id==="chosen"){
   if(["narrative","npc","creator"].includes(diagram)){consoleGame();if(state.sdkReady)badge(34,-43);return;}
-  paper(-12,-27,48,62);paper(4,-12,48,62);rows(-10,-20,24,3);badge(25,22,diagram==="research"?"coin":"check");return;
+  paper(-12,-27,48,62);paper(4,-12,48,62);rows(-10,-20,24,3);if(diagram==="research"?state.sold:state.selected)badge(25,22,diagram==="research"?"coin":"check");return;
  }
  if(id==="dialogue"){
   robot(17,-1,.76);bubble(-23,-40,43,30,C.paper);rows(-35,-45,22,2);
@@ -385,23 +418,29 @@ function paint(g,scene,node,state={}){
  if(id==="feedback"){
   if(["problem","risk"].includes(diagram)){
    paper(-9,-18,61,78);rows(-28,-35,36,4);
-   poly([[15,7],[9,34],[20,28],[30,35],[30,8]],C.blue);
-   badge(22,4);if(state.policyRecommended){arrow([-41,20],[-24,20],C.gold,3);}return;
+   if(state.policyAdopted){poly([[15,7],[9,34],[20,28],[30,35],[30,8]],C.blue);badge(22,4);}if(state.policyRecommended){arrow([-41,20],[-24,20],C.gold,3);}return;
   }
   if(diagram==="research"){
    robot(-13,-9,.8);bulb(30,-39,.9);bubble(27,15,26,19,C.sky);if(state.suggested)arrow([19,16],[34,10],C.green,1.8);return;
   }
   if(diagram==="narrative"){
-   world();arc(0,-10,50,.1,2.9,C.gold,2.5);arrow([-48,5],[-43,-5],C.gold,2.5);return;
+   world(state.buildProgress??(state.storyStarted?0:1),state.reconstructionProgress||0);arc(0,-10,50,.1,2.9,C.gold,2.5);arrow([-48,5],[-43,-5],C.gold,2.5);return;
   }
   if(diagram==="npc"){character(state.characterUpdated);return;}
-  if(diagram==="creator"){trends();target(30,18,15);if(state.guidanceReady)badge(-29,21);return;}
+  if(diagram==="creator"){trends(.7);if(state.guidanceReady){goals(state.guidanceProgress??1);badge(-29,21);}target(30,18,15);return;}
  }
  // Every declared object has a visual role; fallback is a neutral document.
  logCard("content",false);
 }
 window.WorfArt={
- draw(scene,node,state={}){const g=scene.add.graphics();paint(g,scene,node,state);return g;},
+ draw(scene,node,state={},target){
+  const g=target||scene.add.graphics();
+  // These drawings change in discrete steps; avoid rebuilding identical commands between steps.
+  const value=node.id==="knowledge"?state.knowledgeNodes||0:node.id==="rag"?state.engineRevision||state.incubationRevision||0:null;
+  const stamp=value===null?null:scene.diagram.id+":"+node.id+":"+value;
+  if(stamp!==null&&g.worfArtStamp===stamp)return g;
+  paint(g,scene,node,state);g.worfArtStamp=stamp;return g;
+ },
  paint,
  tile(g,node,selected=false,hovered=false){
   const {poly,ellipse,line}=kit(g);g.clear();

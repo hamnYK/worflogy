@@ -4,9 +4,11 @@
   "use strict";
   window.createOverviewStory = function (scene) {
     const BLUE=window.WorfTheme.link,GREEN=window.WorfTheme.active,GOLD=window.WorfTheme.flow;
+    const MOTION=window.WorfMotion.overview;
+    const reducedMotion=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const layers=new Map(),tweens=[],particles=[];
     const state={topNodes:6,topStrength:1,bottomNodes:3,growthCycles:0,topSemantics:0,bottomSemantics:0,cosmos:0,topCosmos:0,bottomCosmos:0,chapter:"top-down"};
-    let settle=null;
+    let settle=null,arrivalDelay=0,stepDuration=0;
     const steps=[
       ["cosmos","ontology","온톨로지는 의미와 관계가 연결된 세계, 시맨틱 코스모스입니다. 먼저 Top-Down으로 구성하는 과정을 살펴봅니다.",5160],
       ["interpret","holistic","현상을 이루는 요소와 그 관계를 전체 흐름 속에서 해석합니다.",3210],
@@ -50,17 +52,29 @@
     function cosmos(progress=state.cosmos) {
       window.WorfArt.paint(layer("ontology"),scene,scene.nodes.get("ontology"),{cosmos:progress,chapter:state.chapter});
     }
-    function animate(draw,duration,finalize) {
+    function dynamics(progress) {
+      window.WorfArt.paint(layer("dynamics"),scene,scene.nodes.get("dynamics"),{dynamicsProgress:progress});
+    }
+    function animate(draw,duration,finalize,delay=arrivalDelay) {
+      if(reducedMotion()){finalize?.();draw(1);return;}
+      duration=Math.min(duration,Math.max(1,stepDuration-delay-200));
       settle=()=>{finalize?.();draw(1);};
-      const t=scene.tweens.addCounter({from:0,to:1,duration,onUpdate:tween=>draw(tween.getValue()),onComplete:()=>{finalize?.();settle=null;}});
+      const t=scene.tweens.addCounter({from:0,to:1,duration,delay,ease:MOTION.ease,onUpdate:tween=>draw(tween.getValue()),onComplete:()=>{finalize?.();settle=null;}});
       tweens.push(t);
     }
     function travel(from,to,color) {
+      arrivalDelay=Math.max(arrivalDelay,MOTION.flowDuration);
+      if(reducedMotion())return;
       const a=scene.nodes.get(from),b=scene.nodes.get(to);
       for(let i=0;i<3;i++){
         const p=scene.add.circle(a.x,a.y,3.5,color).setDepth(1900);particles.push(p);
-        tweens.push(scene.tweens.add({targets:p,x:b.x,y:b.y,delay:i*180,duration:1000,onComplete:()=>p.destroy()}));
+        tweens.push(scene.tweens.add({targets:p,x:b.x,y:b.y,delay:i*180,duration:MOTION.flowDuration,onComplete:()=>p.destroy()}));
       }
+    }
+    function receiveDynamics(from,color,start) {
+      travel(from,"dynamics",color);
+      // Both sources use the first signal's arrival time and the same receiver response.
+      animate(p=>dynamics(start+p),MOTION.feedbackDuration,null,MOTION.flowDuration);
     }
     function finishStep() {
       tweens.splice(0).forEach(t=>t.stop());
@@ -71,6 +85,7 @@
     function step(key) {
       finishStep();
       const [,focus,text,duration]=steps.find(s=>s[0]===key);
+      arrivalDelay=0;stepDuration=duration;
       if(key==="bottom-start"){
         state.chapter="bottom-up";state.cosmos=0;
         scene.visited=new Set();
@@ -81,8 +96,8 @@
         case "cosmos":cosmos(0);break;
         case "bottom-interpret":
         case "interpret":
-          const lens=scene.widgets.get("holistic").list[1];
-          tweens.push(scene.tweens.add({targets:lens,scaleX:1.12,scaleY:1.12,yoyo:true,duration:650}));
+          if(reducedMotion())break;
+          animate(p=>window.WorfArt.paint(layer("holistic"),scene,scene.nodes.get("holistic"),{interpretProgress:p}),1300);
           break;
         case "top":
           travel("holistic","linked",BLUE);
@@ -96,14 +111,11 @@
           animate(p=>{state.topSemantics=Math.ceil(p*3);semantics();},1500);
           break;
         case "reconstruct":
-          travel("holistic","dynamics",GREEN);
-          const gear=scene.widgets.get("dynamics").list[1];
-          tweens.push(scene.tweens.add({targets:gear,angle:90,duration:1800}));
+          receiveDynamics("holistic",GREEN,0);
           break;
         case "weak-signal":
-          travel("signal","dynamics",GOLD);
-          const signal=scene.widgets.get("signal").list[1];
-          tweens.push(scene.tweens.add({targets:signal,alpha:.25,yoyo:true,repeat:3,duration:220}));
+          receiveDynamics("signal",GOLD,1);
+
           break;
         case "grow":
           travel("dynamics","worflogy",GREEN);
@@ -124,6 +136,7 @@
       }
       return {focus,text,duration};
     }
+    top(1);bottom(3);semantics();cosmos(0);
     return {
       stages:steps.map(([key])=>({type:"overview",key})),
       step,finishStep,

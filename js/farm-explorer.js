@@ -19,6 +19,7 @@
   function leaf(g,x,y,right){path(g,`M ${x} ${y} Q ${x+(right?26:-26)} ${y-33} ${x+(right?30:-30)} ${y-12} Q ${x+(right?20:-20)} ${y+3} ${x} ${y} Z`,'secondaryDark',.7,'secondary');path(g,`M ${x} ${y} l ${right?22:-22} -13`,'secondaryLight',1);}
   function plant(g,fruit=false){
    ellipse(g,0,2,25,8,'shadow',.1);path(g,'M -23 -27 L -17 0 Q 0 10 17 0 L 23 -27','flow',1,'cream');ellipse(g,0,-27,23,7,'highlight');ellipse(g,0,-27,18,4,'dark');
+   g=el('g',{'data-virtual-foliage':''},g);
    path(g,'M 0 -27 Q 3 -59 0 -104','secondaryDark',4);
    leaf(g,0,-48,false);leaf(g,1,-65,true);leaf(g,0,-83,false);leaf(g,0,-100,true);
    if(fruit){for(const [x,y]of [[-13,-55],[19,-71],[-8,-88]]){dot(g,x,y,8,'accent');dot(g,x-2,y-3,2,'highlight');}}
@@ -165,8 +166,8 @@
    if(stage>=6)bubble(user,145,210,stage===6?'dots':stage===8?'heart':'dots');
    // Conversation alternates between the farmer and the character, instead of crossing the whole diagram.
    if(stage>=6){
-    const a=[194,266],b=[219,239],reverse=stage===8;
-    path(immersive,'M 194 266 Q 214 268 219 239',stage===8?'secondary':'active',1.4,'none',{'stroke-dasharray':'3 5','data-chatbot-link':''});
+    const a=[194,266],b=[219,239],reverse=stage>=7;
+    path(immersive,'M 194 266 Q 214 268 219 239',reverse?'secondary':'active',1.4,'none',{'stroke-dasharray':'3 5','data-chatbot-link':''});
     if(stage<8)dot(immersive,...a,3,'accent',{'data-farm-packet':'','data-from':(reverse?b:a).join(','),'data-to':(reverse?a:b).join(',')});
    }
    for(const arm of svg.querySelectorAll('[data-linked-avatar] [data-farm-arm]')){
@@ -181,7 +182,7 @@
   document.addEventListener("visibilitychange",visibility);
   function tick(time){frame=0;const dt=last?Math.min(time-last,100):0;last=time;if(visible&&running){elapsed+=dt;if(elapsed>=2200)advance();else if(!reduced.matches){
    for(const packet of svg.querySelectorAll('[data-farm-packet]')){const a=packet.dataset.from.split(',').map(Number),b=packet.dataset.to.split(',').map(Number),t=(elapsed%1200)/1200;packet.setAttribute('cx',a[0]+(b[0]-a[0])*t);packet.setAttribute('cy',a[1]+(b[1]-a[1])*t);}
-   if(stage===3||stage===4){const plant=svg.querySelector('[data-virtual-plant]');if(plant)plant.setAttribute('transform',`translate(250,230) scale(.86) rotate(${Math.sin(elapsed/360)*2})`);}
+   if(stage===3||stage===4){const foliage=svg.querySelector('[data-virtual-foliage]');if(foliage)foliage.setAttribute('transform',`rotate(${Math.sin(elapsed/360)*2} 0 -27)`);}
    if(stage>=5)for(const arm of svg.querySelectorAll('[data-linked-avatar] [data-farm-arm]'))arm.setAttribute('transform',`rotate(${-12+Math.sin(elapsed/420)*12} 9 -40)`);
    if(stage>=6)for(const arm of svg.querySelectorAll('[data-farmer] [data-farm-arm]'))arm.setAttribute('transform',`rotate(${Math.sin(elapsed/500)*3} 9 -40)`);
   }}schedule();}

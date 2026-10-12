@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawNpcObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawNpcObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 window.createNpcStory=function(scene){
  return window.createProblemStory(scene,{
  draw:window.drawNpcObject,
@@ -27,12 +27,12 @@ window.createNpcStory=function(scene){
  case "character":focus(["start","core"]);flow("start","core");break;
  case "model":state.modelReady=true;focus(["core"]);render("core");break;
  case "simulate":focus(["core","alternative"]);flow("core","alternative",GOLD);animate(p=>{state.simulationProgress=p;render("alternative");});break;
- case "refine":state.modelRevision=1;focus(["alternative","core"]);flow("alternative","core",GOLD);render("core");break;
+ case "refine":focus(["alternative","core"]);flow("alternative","core",GOLD);animate(p=>{state.modelRevision=p;render("core");});break;
  case "sdk":state.sdkReady=true;focus(["core","chosen"]);flow("core","chosen");render("chosen");break;
  case "play":focus(["chosen","report"]);flow("chosen","report");animate(p=>{state.playLogCount=Math.floor(p*5);render("report");});break;
  case "decisions":state.decisionsAnalyzed=true;focus(["report","review"]);flow("report","review");render("review");break;
  case "update-character":state.characterUpdated=true;focus(["review","feedback"]);flow("review","feedback");render("feedback");break;
- case "rebuild":state.modelRevision=2;focus(["feedback","core"]);flow("feedback","core",GOLD);render("core");break;
+ case "rebuild":focus(["feedback","core"]);flow("feedback","core",GOLD);animate(p=>{state.modelRevision=1+p;render("core");});break;
  case "record":focus(["core","alternative","chosen","report","review","feedback","logic","knowledge"]);flow("logic","knowledge");animate(p=>{state.knowledgeNodes=Math.floor(p*18);render("knowledge");});break;
  case "ontology":focus(["knowledge","rag","agent"]);flow("knowledge","rag",GOLD);animate(p=>{state.engineRevision=p>.5?2:0;render("rag");});break;
  }

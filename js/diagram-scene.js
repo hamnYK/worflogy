@@ -15,6 +15,12 @@
     mobileInput.addEventListener("change", syncInput);
     let pending;
     let visible=true;
+    function syncVisibility(){
+      if(!activeScene)return;
+      if(visible&&!document.hidden){activeScene.scene.resume();activeScene.game.loop.wake();}
+      else{activeScene.scene.pause();activeScene.game.loop.sleep();}
+    }
+    document.addEventListener("visibilitychange",syncVisibility);
     const layouts = new Map();
     const views = new Map();
     const heritageLayer=document.createElement("div");
@@ -67,7 +73,7 @@
         this.events.once("shutdown",()=>host.removeEventListener("wheel",wheelHandler));
         this.scale.on("resize", () => this.resizeView());
         if (pending) this.loadDiagram(pending);
-        if(!visible){this.scene.pause();game.loop.sleep();}
+        syncVisibility();
       }
       saveView() {
         if(!this.diagram)return;
@@ -146,8 +152,7 @@
           const y=(n.y-24-camera.scrollY-camera.height/2)*z+camera.height/2;
           // Render text at native CSS resolution; avoid scaling a rasterized text layer.
           label.style.setProperty("--label-x",Math.round(x)+"px");label.style.setProperty("--label-y",Math.round(y)+"px");
-          label.style.setProperty("--label-width",Math.max(170,200*z)+"px");
-          label.style.setProperty("--label-font-size",Math.max(14,17*z)+"px");
+          label.style.setProperty("--label-zoom",z);
           label.style.setProperty("--label-opacity",this.widgets.get(id)?.alpha??1);
         });
       }
@@ -264,6 +269,7 @@ startMeeting() {
  this.finishMeeting();
  const origin=this.project(85,475);this.player.setPosition(origin.x,origin.y);
  this.meetingTarget=this.meetingPosition();
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches){this.player.setPosition(this.meetingTarget.x,this.meetingTarget.y);return;}
  this.meetingTween=this.tweens.add({targets:this.player,...this.meetingTarget,duration:1200,
    onComplete:()=>{this.meetingTween=null;}});
 }
@@ -343,6 +349,7 @@ createPlayer() {
         const agent=this.nodes.get("agent");
         let text="",speaker="",duration=1100;
         if(stage.type==="context"){
+          this.storyFlowEdges=new Set(["knowledge>agent"]);
           this.visited.add("knowledge");this.visited.add("agent");
           this.platformHighlights=new Set(["knowledge","agent"]);this.select("agent");
           window.emitContextFlow(this);
@@ -477,11 +484,9 @@ createPlayer() {
       reset(){if(activeScene?.diagram){const diagram=activeScene.diagram;activeScene.cancelStory();activeScene.diagram=null;layouts.delete(diagram.id);views.delete(diagram.id);activeScene.loadDiagram(diagram);}},
       setVisible(value){
         visible=value;
-        if(!activeScene)return;
-        if(visible){activeScene.scene.resume();game.loop.wake();}
-        else {activeScene.scene.pause();game.loop.sleep();}
+        syncVisibility();
       },
-      destroy(){mobileInput.removeEventListener("change",syncInput);heritageLayer.remove();game.destroy(true);}
+      destroy(){document.removeEventListener("visibilitychange",syncVisibility);mobileInput.removeEventListener("change",syncInput);heritageLayer.remove();game.destroy(true);}
     };
   };
 })();

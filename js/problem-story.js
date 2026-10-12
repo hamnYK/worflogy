@@ -2,10 +2,10 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawProblemObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawProblemObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 window.createProblemStory=function(scene,options={}){
- const state={discussed:false,selected:false,weakSignal:false,reported:false,reviewed:false,policyAdopted:false,policyRecommended:false,alternativeRecommended:false,knowledgeNodes:0,engineRevision:0};
- const layers=new Map(),tweens=[],particles=[];let settle=null;
+ const state={storyStarted:true,discussed:false,selected:false,weakSignal:false,reported:false,reviewed:false,policyAdopted:false,policyRecommended:false,alternativeRecommended:false,knowledgeNodes:0,engineRevision:0};
+ const layers=new Map(),tweens=[],particles=[];const timeline=window.createStoryTimeline(scene);
  let steps=[
  ["meet","agent","에이전트","에이전트에게 문제를 설명하고 팀의 논의를 시작합니다.",2885],
  ["infrastructure","rag","온톨로지 엔진","워크플로 온톨로지 엔진이 관련 지식을 찾아 에이전트를 통한 팀의 논의를 지원합니다.",3990],
@@ -23,26 +23,27 @@ window.createProblemStory=function(scene,options={}){
  ["expand","knowledge","네트워크 성장 루프","전략을 재검토하는 과정에서 새로운 관계가 생기고, 성장한 지식이 다음 협업에 활용됩니다.",4185]
  ];
  if(options.steps)steps=options.steps(steps);
- function render(id){layers.get(id)?.destroy();scene.widgets.get(id).list[1].setVisible(false);const g=(options.draw||window.drawProblemObject)(scene,scene.nodes.get(id),state);scene.widgets.get(id).add(g);layers.set(id,g);}
+ function render(id){if(timeline.render(id,()=>render(id)))return;const previous=layers.get(id),widget=scene.widgets.get(id);widget.list[1].setVisible(false);const g=(options.draw||window.drawProblemObject)(scene,scene.nodes.get(id),state,previous);if(g!==previous){previous?.destroy();widget.add(g);layers.set(id,g);}}
  function focus(ids){scene.platformHighlights=new Set(ids);ids.forEach(id=>scene.visited.add(id));}
- function flow(from,to,color=INK){
+ function flow(from,to,color=INK){timeline.flow(from,to,(delay,duration)=>emitFlow(from,to,color,delay,duration));}
+ function emitFlow(from,to,color,delay,duration){
   const edge=scene.diagram.edges.find(e=>(e.from===from&&e.to===to)||(e.both&&e.from===to&&e.to===from));
   let route=window.platformEdgePath(scene,edge||{from,to});
   if(edge&&edge.from!==from)route=route.reverse();
   if(route.length<2)return;
   const lengths=route.slice(1).map((p,i)=>Math.hypot(p.x-route[i].x,p.y-route[i].y)),total=lengths.reduce((a,b)=>a+b,0);
   for(let i=0;i<3;i++){
-   const p=scene.add.circle(route[0].x,route[0].y,3.5,color).setDepth(1900);particles.push(p);
-   tweens.push(scene.tweens.addCounter({from:0,to:total,duration:1600,delay:i*170,onUpdate:t=>{
+   const p=scene.add.circle(route[0].x,route[0].y,3.5,color).setDepth(1900).setAlpha(0);particles.push(p);
+   tweens.push(scene.tweens.addCounter({from:0,to:total,duration,delay:delay+i*window.WorfMotion.workflow.packetStagger,onStart:()=>p.setAlpha(1),onUpdate:t=>{
     let d=t.getValue(),j=0;while(j<lengths.length-1&&d>lengths[j])d-=lengths[j++];
     const a=route[j],b=route[j+1],r=Math.min(1,d/(lengths[j]||1));p.setPosition(a.x+(b.x-a.x)*r,a.y+(b.y-a.y)*r);
    },onComplete:()=>p.destroy()}));
   }
  }
- function animate(draw){settle=()=>draw(1);tweens.push(scene.tweens.addCounter({from:0,to:1,duration:2200,onUpdate:t=>draw(t.getValue()),onComplete:()=>{settle=null;}}));}
- function finishStep(){tweens.splice(0).forEach(t=>t.stop());if(settle){const done=settle;settle=null;done();}particles.splice(0).forEach(p=>p.destroy());}
+ function animate(draw){timeline.animate(draw);}
+ function finishStep(){tweens.splice(0).forEach(t=>t.stop());timeline.finish();particles.splice(0).forEach(p=>p.destroy());}
  function step(key){
-  finishStep();const [,id,speaker,text,duration]=steps.find(s=>s[0]===key);focus([id,"agent"]);
+  finishStep();timeline.begin();const [,id,speaker,text,duration]=steps.find(s=>s[0]===key);focus([id,"agent"]);
   switch(key){
    case "meet":scene.startMeeting();break;
    case "infrastructure":focus(["agent","rag"]);flow("rag","agent",BLUE);break;
@@ -60,8 +61,10 @@ window.createProblemStory=function(scene,options={}){
    case "expand":focus(["logic","knowledge","rag","core","alternative"]);flow("logic","knowledge");flow("knowledge","rag",GOLD);animate(p=>{state.knowledgeNodes=12+Math.floor(p*6);state.engineRevision=p>.5?2:1;render("knowledge");render("rag");});break;
   }
   options.onStep?.(key,{state,focus,flow,render,animate});
-  scene.select(id);return {focus:id,speaker,text,duration};
+  const visualDuration=timeline.flush();scene.select(id);return {focus:id,speaker,text,duration:Math.max(duration,visualDuration+200)};
  }
+ // Start from the unprocessed state on every replay, including objects whose first change comes later.
+ scene.nodes.forEach(node=>render(node.id));
  return {stages:steps.map(([key])=>({type:"platform",key})),step,finishStep,stats:()=>({...state}),destroy(){finishStep();layers.forEach(g=>g.destroy());scene.platformHighlights=null;}};
 };
 })();

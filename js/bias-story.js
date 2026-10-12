@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawBiasObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawBiasObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 window.createBiasStory=function(scene){
  return window.createProblemStory(scene,{
  draw:window.drawBiasObject,

@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const INK=window.WorfTheme.active,BLUE=window.WorfTheme.link,GOLD=window.WorfTheme.flow;
-window.drawNarrativeObject=function(scene,node,state={}){return window.WorfArt.draw(scene,node,state);};
+window.drawNarrativeObject=function(scene,node,state={},target){return window.WorfArt.draw(scene,node,state,target);};
 window.createNarrativeStory=function(scene){
  return window.createProblemStory(scene,{
  draw:window.drawNarrativeObject,
@@ -24,13 +24,13 @@ window.createNarrativeStory=function(scene){
  switch(key){
  case "infrastructure":focus(["content","rag","agent"]);flow("content","agent",BLUE);flow("content","rag",BLUE);break;
  case "sources":focus(["start","core"]);flow("start","core");break;
- case "build":state.built=true;focus(["core"]);render("core");break;
- case "edit":state.edited=true;focus(["core","alternative"]);flow("core","alternative",GOLD);flow("alternative","core",GOLD);render("alternative");break;
+ case "build":state.built=true;focus(["core"]);animate(p=>{state.buildProgress=p;render("core");render("feedback");});break;
+ case "edit":state.edited=true;focus(["core","alternative"]);flow("core","alternative",GOLD);flow("alternative","core",GOLD);render("alternative");animate(p=>{state.editProgress=p;render("core");});break;
  case "sdk":state.sdkReady=true;focus(["core","chosen"]);flow("core","chosen");render("chosen");break;
  case "play":focus(["chosen","report"]);flow("chosen","report");animate(p=>{state.playLogCount=Math.floor(p*5);render("report");});break;
  case "analyze":state.analyzed=true;focus(["report","review"]);flow("report","review");render("review");break;
- case "reconstruct":state.reconstructed=true;focus(["review","feedback"]);flow("review","feedback");render("feedback");break;
- case "revise-world":state.narrativeRevision=1;focus(["feedback","core"]);flow("feedback","core",GOLD);render("core");break;
+ case "reconstruct":state.reconstructed=true;focus(["review","feedback"]);flow("review","feedback");animate(p=>{state.reconstructionProgress=p;render("feedback");});break;
+ case "revise-world":focus(["feedback","core"]);flow("feedback","core",GOLD);animate(p=>{state.narrativeRevision=p;render("core");});break;
  case "record":focus(["core","alternative","chosen","report","review","feedback","logic","knowledge"]);flow("logic","knowledge");animate(p=>{state.knowledgeNodes=Math.floor(p*18);render("knowledge");});break;
  case "ontology":focus(["knowledge","rag","agent"]);flow("knowledge","rag",GOLD);animate(p=>{state.engineRevision=p>.5?2:0;render("rag");});break;
  }

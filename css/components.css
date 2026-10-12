@@ -108,4 +108,4 @@ textarea.wf-input {min-height:100px;resize:vertical}
 #press-dialog .article-content .article-attribution-note{font-size: var(--font-size-xs); display: inline-block; margin-top: var(--space-2);}
 
 .diagram-input-canvas{pointer-events:auto;touch-action:none}.diagram-input-canvas.diagram-touch-scroll{pointer-events:none!important;touch-action:auto!important}
-.canvas-heritage .canvas-heritage__label{transform:translate(var(--label-x),var(--label-y));width:var(--label-width);font-size:var(--label-font-size);opacity:var(--label-opacity)}
+.canvas-heritage .canvas-heritage__label{transform:translate(var(--label-x),var(--label-y));width:max(var(--diagram-label-min-width),calc(var(--diagram-label-width) * var(--label-zoom)));font-size:max(var(--diagram-label-min-font-size),calc(var(--diagram-label-font-size) * var(--label-zoom)));opacity:var(--label-opacity)}
