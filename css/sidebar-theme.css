@@ -1,0 +1,29 @@
+/* Sidebar surfaces share the homepage design-system tokens; geometry stays in component CSS. */
+:is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button){
+ border:1px solid var(--color-border-input);border-radius:var(--radius-control);font-family:var(--font-body);font-weight:var(--font-weight-semibold);line-height:var(--line-height-tight);background:var(--color-white);color:var(--color-text);box-shadow:var(--shadow-control);
+ transition:background-color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard)
+}
+:is(.studio-home,.ds-page) .floating-actions>.language-floating{background:var(--color-surface-subtle);color:var(--color-text-brand);border-color:var(--color-border)}
+:is(.studio-home,.ds-page) .floating-actions>.workshop-floating{background:var(--color-action);border-color:var(--color-action);color:var(--color-on-action)}
+:is(.studio-home,.ds-page) :is(.section-elevator,.ds-elevator-preview){background:var(--dialog-header-background);border-color:var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-floating)}
+:is(.studio-home,.ds-page) :is(.section-elevator,.ds-elevator-preview)>output{color:var(--color-text-muted);font-family:var(--font-display-en);font-size:var(--font-size-xs);font-weight:var(--font-weight-semibold);font-variant-numeric:tabular-nums}
+.studio-home .section-elevator>button:disabled{background:var(--color-surface);border-color:var(--color-border);color:var(--color-text-muted);box-shadow:none;cursor:default}
+.studio-home .section-elevator>button:disabled span:first-child{color:inherit}
+.studio-home .section-elevator>.arcade-open{color:var(--color-action);border-color:var(--color-border-input);transform:none}
+.site-updates{box-shadow:var(--shadow-floating);scrollbar-color:var(--color-border-input) var(--color-surface)}
+.updates-heading{position:sticky;top:0;z-index:1;border-top:var(--space-1) solid transparent;border-image:var(--dialog-accent) 1;background:var(--dialog-header-background)}
+.updates-heading h2,.site-updates h3{font-family:var(--font-display);font-weight:var(--font-weight-semibold);line-height:var(--line-height-tight)}
+.updates-label{display:inline-block;padding:var(--worf-foundation-space-2px) var(--space-2);border-radius:var(--radius-control);background:var(--color-surface-subtle);color:var(--color-text-brand);font-size:var(--font-size-xs);letter-spacing:.04em}
+.site-updates h3{margin-top:var(--space-2);margin-bottom:var(--space-2)}
+.site-updates p{line-height:var(--line-height-body)}
+.updates-action{background:var(--color-white);color:var(--color-action);border-color:var(--color-border-input);box-shadow:var(--shadow-control);font-family:var(--font-body);line-height:var(--line-height-tight);min-height:var(--control-height-touch);transition:background-color var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard)}
+.updates-heading button,.updates-footer button{border-radius:var(--radius-control);font-family:var(--font-body);min-height:var(--control-height-touch)}
+.updates-reopen{border-radius:var(--radius-control);background:var(--dialog-header-background);color:var(--color-text-brand)}
+@media(hover:hover){
+ :is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button):not(:disabled):hover,.updates-action:hover{background:var(--color-surface-hover);border-color:var(--color-action);color:var(--color-action-hover);transform:none}
+ :is(.studio-home,.ds-page) .floating-actions>.workshop-floating:hover{background:var(--color-action-hover);color:var(--color-on-action)}
+ .updates-heading button:hover,.updates-footer button:hover{background:var(--color-surface-hover);color:var(--color-action)}
+}
+:is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button):focus-visible,.site-updates :is(a,button):focus-visible,.updates-reopen:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+:is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button):not(:disabled):active,.updates-action:active{background:var(--color-surface-subtle);color:var(--color-action-hover)}
+@media(prefers-reduced-motion:reduce){:is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button),.updates-action{transition:none}}
