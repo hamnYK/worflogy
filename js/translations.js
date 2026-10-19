@@ -1,4 +1,10 @@
 window.WORFLOGY_EN = {
+  "AI 사건과 정책의 간극을 살펴보고,": "Explore AI incidents and policy gaps.",
+  "함께 대응 방안을 찾아보세요.": "Help shape a shared response.",
+  "아트갤러리 신규 공개": "Introducing Art of Contexton",
+  "나만의 갤러리에 작품을 전시하고,": "Exhibit your work in a 3D gallery.",
+  "도슨트와 함께 감상해 보세요.": "Explore exhibitions with a virtual guide.",
+  "아트갤러리 둘러보기": "Explore the gallery",
   "AI 리스크·정책 페이지 오픈": "Introducing AI Risk & Policy",
   "사건에서 정책까지 : Gap 대응 글로벌 커뮤니티": "From incidents to policy: a global community bridging the gaps",
   "AI 정책 참여하기": "Get involved in AI policy",
