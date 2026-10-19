@@ -144,11 +144,11 @@
   --control-height: 40px;
   --control-height-touch: 44px;
   --content-width: 1320px;
-  --page-gutter: 40px;
+  --page-gutter: var(--space-10);
   --floating-rail-width: 120px;
   --floating-panel-gap: var(--space-4);
-  --floating-gap: 8px;
-  --floating-inset: 24px;
+  --floating-gap: var(--space-2);
+  --floating-inset: var(--space-6);
   --z-caption: 2;
   --z-canvas-controls: 3;
   --z-floating: 5;
@@ -168,4 +168,103 @@
 }
 @media(prefers-reduced-motion:reduce) {
   :root { --duration-fast: 0ms; }
+}
+
+/* Shared homepage UI metrics; keep geometry and typography roles separate. */
+:root {
+  --ui-space-negative-80px: -80px;
+  --ui-size-78px: 78px;
+  --ui-stroke-1px: 1px;
+  --ui-tracking-negative-1px: -1px;
+  --ui-size-146px: 146px;
+  --ui-tracking-0point-4px: 0.4px;
+  --ui-tracking-negative-0point-5px: -0.5px;
+  --ui-size-900px: 900px;
+  --ui-size-35px: 35px;
+  --ui-size-54px: 54px;
+  --ui-size-48px: 48px;
+  --ui-size-20px: 20px;
+  --ui-size-620px: 620px;
+  --ui-size-89px: 89px;
+  --ui-size-62px: 62px;
+  --ui-size-66px: 66px;
+  --ui-size-155px: 155px;
+  --ui-size-28px: 28px;
+  --ui-size-470px: 470px;
+  --ui-leading-1point-9: 1.9;
+  --ui-size-32px: 32px;
+  --ui-size-360px: 360px;
+  --ui-leading-1point-55: 1.55;
+  --ui-size-760px: 760px;
+  --ui-tracking-1point-4px: 1.4px;
+  --ui-leading-1point-5: 1.5;
+  --ui-size-30px: 30px;
+  --ui-leading-1point-6: 1.6;
+  --ui-size-480px: 480px;
+  --ui-leading-1: 1;
+  --ui-size-100px: 100px;
+  --ui-size-140px: 140px;
+  --ui-size-860px: 860px;
+  --ui-size-40px: 40px;
+  --ui-leading-1point-85: 1.85;
+  --ui-size-90px: 90px;
+  --ui-leading-1point-65: 1.65;
+  --ui-tracking-negative-0point-2px: -0.2px;
+  --ui-size-44px: 44px;
+  --ui-leading-1point-45: 1.45;
+  --ui-size-170px: 170px;
+  --ui-tracking-negative-0point-02em: -0.02em;
+  --ui-stroke-3px: 3px;
+  --ui-size-1px: 1px;
+  --ui-stroke-2px: 2px;
+  --ui-tracking-negative-0point-025em: -0.025em;
+  --ui-leading-1point-8: 1.8;
+  --ui-tracking-negative-0point-01em: -0.01em;
+  --ui-tracking-0point-04em: 0.04em;
+  --ui-leading-1point-7: 1.7;
+  --ui-tracking-negative-0point-015em: -0.015em;
+  --ui-leading-1point-3: 1.3;
+  --ui-size-208px: 208px;
+  --ui-size-1400px: 1400px;
+  --ui-size-80px: 80px;
+  --ui-size-180px: 180px;
+  --ui-size-88px: 88px;
+  --ui-size-4px: 4px;
+  --ui-size-72px: 72px;
+  --ui-size-3px: 3px;
+  --ui-size-520px: 520px;
+  --ui-size-1180px: 1180px;
+  --ui-size-64px: 64px;
+  --ui-leading-0: 0;
+  --ui-size-16px: 16px;
+  --ui-size-60px: 60px;
+  --ui-size-24px: 24px;
+  --ui-size-6px: 6px;
+  --ui-size-112px: 112px;
+  --ui-size-76px: 76px;
+  --ui-size-56px: 56px;
+  --ui-tracking-0point-08em: 0.08em;
+  --ui-size-820px: 820px;
+  --ui-size-1320px: 1320px;
+  --ui-tracking-1point-5px: 1.5px;
+  --ui-size-720px: 720px;
+  --ui-size-320px: 320px;
+  --ui-size-220px: 220px;
+}
+
+/* Component-specific decorative shadows (shared identical values). */
+:root {
+  --home-text-shadow-detail-1: 0 1px 1px var(--color-surface);
+  --home-box-shadow-detail-2: inset 3px 0 var(--color-coral);
+  --home-box-shadow-detail-3: 0 0 0 2px var(--color-sky);
+}
+
+/* Layout tracks, offsets and decorative pattern metrics. */
+:root {
+  --ui-size-145px: 145px;
+  --ui-size-105px: 105px;
+  --ui-size-1240px: 1240px;
+  --ui-size-160px: 160px;
+  --ui-space-negative-4px: -4px;
+  --ui-size-200px: 200px;
 }
