@@ -145,6 +145,8 @@
   --control-height-touch: 44px;
   --content-width: 1320px;
   --page-gutter: 40px;
+  --floating-rail-width: 120px;
+  --floating-panel-gap: var(--space-4);
   --floating-gap: 8px;
   --floating-inset: 24px;
   --z-caption: 2;

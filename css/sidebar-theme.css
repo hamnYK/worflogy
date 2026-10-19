@@ -27,3 +27,5 @@
 :is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button):focus-visible,.site-updates :is(a,button):focus-visible,.updates-reopen:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
 :is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button):not(:disabled):active,.updates-action:active{background:var(--color-surface-subtle);color:var(--color-action-hover)}
 @media(prefers-reduced-motion:reduce){:is(.studio-home,.ds-page) :is(.floating-actions>a,.section-elevator>button,.ds-elevator-preview>button),.updates-action{transition:none}}
+/* Desktop rail and news panel reserve the same bilingual control width. */
+@media(min-width:761px){.studio-home .floating-actions{width:var(--floating-rail-width)}}
