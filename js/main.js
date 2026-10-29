@@ -137,7 +137,7 @@
       exampleCard=document.createElement("button");exampleCard.type="button";exampleCard.className="canvas-example-card";
       exampleCard.disabled=true;exampleCard.setAttribute("aria-hidden","true");exampleCard.setAttribute("aria-label","제품 미리보기 확대");
       const label=document.createElement("span");label.className="canvas-example-label";label.textContent="제품 미리보기";
-      const photo=document.createElement("img");photo.src="assets/images/canvas-bg/canvas-"+previewNumber+".png";photo.alt="";photo.decoding="async";photo.draggable=false;
+      const photo=document.createElement("img");photo.src="assets/images/canvas-bg/canvas-"+previewNumber+".png?v=28d9e54a1379";photo.alt="";photo.decoding="async";photo.draggable=false;
       const mobilePreview=document.createElement("figure");mobilePreview.className="canvas-mobile-preview";
       const mobileLabel=document.createElement("figcaption");mobileLabel.className="canvas-example-label";mobileLabel.textContent=label.textContent;
       const mobilePhoto=photo.cloneNode();mobilePhoto.alt="제품 미리보기";
