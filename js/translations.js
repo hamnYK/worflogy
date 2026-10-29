@@ -755,6 +755,6 @@ window.WORFLOGY_EN = {
   "개인정보 처리방침 열기": "Open privacy policy",
   "개인정보 처리방침 전문": "Privacy policy full text (Korean)",
   "기사 읽기 ▶": "Read article ▶",
-  "화성특례시 문제해결형 도시데이터플랫폼 사업 중간보고회": "Interim Report Meeting for the Hwaseong Special City Problem-Solving Urban Data Platform Project",
-  "화성특례시 문제해결형 도시데이터플랫폼 사업 중간보고회 현장": "The interim report meeting for the Hwaseong Special City Problem-Solving Urban Data Platform Project"
+  "화성특례시 문제해결형 도시데이터플랫폼 사업 중간보고회 현장": "The interim report meeting for the Hwaseong Special City Problem-Solving Urban Data Platform Project",
+  "화성특례시 문제해결형 도시데이터플랫폼 구축사업": "Hwaseong Special City Problem-Solving Urban Data Platform Development Project"
 };
