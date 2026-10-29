@@ -493,7 +493,6 @@ window.WORFLOGY_EN = {
   "언론보도": "Press",
   "IT동아 · 2026.06.17": "IT Donga - June 17, 2026",
   "[스타트업-ing] 워플로지 \"시맨틱·온톨로지, 기업 고민 해결과 성장 동시에\"": "[Startup-ing] Worflogy: \"Semantics and ontology help businesses solve problems and grow\"",
-  "기사 읽기 →": "Read article ->",
   "활동": "Activities",
   "워플로지 활동": "Worflogy activities",
   "다음 활동 이미지": "Next activity image",
@@ -754,5 +753,8 @@ window.WORFLOGY_EN = {
   "개인정보 처리방침": "Privacy policy (Korean)",
   "개인정보 처리방침 (새 탭)": "Privacy policy in Korean (new tab)",
   "개인정보 처리방침 열기": "Open privacy policy",
-  "개인정보 처리방침 전문": "Privacy policy full text (Korean)"
+  "개인정보 처리방침 전문": "Privacy policy full text (Korean)",
+  "기사 읽기 ▶": "Read article ▶",
+  "화성특례시 문제해결형 도시데이터플랫폼 사업 중간보고회": "Interim Report Meeting for the Hwaseong Special City Problem-Solving Urban Data Platform Project",
+  "화성특례시 문제해결형 도시데이터플랫폼 사업 중간보고회 현장": "The interim report meeting for the Hwaseong Special City Problem-Solving Urban Data Platform Project"
 };

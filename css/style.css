@@ -215,3 +215,7 @@ footer{padding-bottom:calc(var(--space-16) + var(--worf-foundation-space-96px))}
  .company-info>div{grid-template-columns:minmax(0,var(--ui-size-100px)) minmax(0,1fr)}
  input:not([type=checkbox]):not([type=radio]),textarea,select{font-size:var(--font-size-body);max-width:100%}
 }
+
+/* Additional activity coverage keeps the supplied panorama uncropped. */
+#pr .activity-news{margin-top:var(--space-6)}
+#pr .activity-news img{aspect-ratio:auto;object-fit:contain}
