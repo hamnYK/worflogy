@@ -14,3 +14,14 @@
  .updates-heading{position:sticky;top:0;z-index:1;background:var(--color-white)}
  .site-updates article{padding:var(--space-4)}.updates-heading button,.updates-footer button,.updates-action{font-size:var(--font-size-ui)}
 }
+
+/* Equal bilingual action targets; keep DOM reading order text then action. */
+.site-updates .updates-action{box-sizing:border-box;width:var(--ui-size-160px);height:var(--ui-size-56px);padding:var(--space-2) var(--space-3);text-align:center;white-space:normal}
+@media(min-width:761px){
+ .site-updates{width:var(--ui-size-520px);max-width:calc(100vw - var(--floating-inset) * 2 - var(--floating-rail-width) - var(--floating-panel-gap))}
+ .site-updates article{display:grid;grid-template-columns:minmax(0,1fr) var(--ui-size-160px);column-gap:var(--space-4);align-items:start}
+ .site-updates article>.updates-label,.site-updates article>h3,.site-updates article>p{grid-column:1;min-width:0}
+ .site-updates article>.updates-label{justify-self:start}
+ .site-updates article>p{margin-bottom:0}
+ .site-updates article>.updates-action{grid-column:2;grid-row:1 / 4;align-self:center}
+}
