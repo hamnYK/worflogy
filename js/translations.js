@@ -1,4 +1,8 @@
 window.WORFLOGY_EN = {
+  "AI 리스크 정책 글로벌 커뮤니티": "Global AI risk & policy community",
+  "협업 온톨로지 기반 글 작성": "Collaborative ontology-based writing",
+  "도슨트가 있는 개인 가상 갤러리": "Your virtual gallery with a docent",
+  "W3C 온톨로지 표준 및 기술 한계 체험": "W3C ontology standards & limits",
   "AI 사건·사고와 안전 정책의 Gap을 살펴보고,": "Explore gaps between AI incidents and safety policies.",
   "글로벌 커뮤니티에서 정책을 함께 논의해 보세요.": "Join a global community to discuss policy.",
   "아트갤러리 신규 공개": "Introducing Art of Contexton",
