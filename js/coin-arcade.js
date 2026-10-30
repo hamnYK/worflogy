@@ -142,9 +142,28 @@ function lobby(){
  dialog.querySelector('.arcade-null-sector-play').onclick=nullSectorEntry;
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact claw-card"><h2 class="wf-card__title" lang="en">POCKET PLUSH</h2><button type="button" class="wf-card__action arcade-claw-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
  dialog.querySelector('.arcade-claw-play').onclick=()=>start('claw');
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<button type="button" class="wf-card wf-card--glass wf-card--compact untitle-card" aria-label="2026 Untitle - PLAY"><span class="wf-card__title" lang="en">2026 Untitle</span><span class="wf-card__action"><span aria-hidden="true">&#9654;</span> PLAY</span></button>');
+ dialog.querySelector('.untitle-card').onclick=playUntitle;
  dialog.querySelector('.arcade-play').onclick=()=>start('football');
  dialog.querySelector('.arcade-basketball-play').onclick=()=>start('basketball');
  dialog.querySelector('.arcade-curling-play').onclick=()=>start('curling');
+}
+
+function playUntitle(){
+ stopGame();inLobby=false;syncMusic();
+ dialog.classList.add('arcade-playing');dialog.scrollTop=0;
+ const host=dialog.querySelector('.arcade-content');
+ host.innerHTML='<section class="arcade-film" aria-labelledby="arcade-film-title"><div class="game-heading"><button type="button" class="wf-button game-back">'+t('AFTER HOURS로 돌아가기','BACK TO AFTER HOURS')+'</button><h2 id="arcade-film-title" lang="en">2026 Untitle</h2></div><video class="arcade-film-video" controls playsinline preload="metadata" aria-label="2026 Untitle" src="./assets/videos/starhaven-promo-15s-1080p-small.mp4"></video><p class="game-status" role="status" hidden></p></section>';
+ const video=host.querySelector('.arcade-film-video');
+ const status=host.querySelector('[role="status"]');
+ let disposed=false;
+ const back=()=>{if(disposed)return;lobby();dialog.querySelector('.untitle-card')?.focus({preventScroll:true});};
+ host.querySelector('.game-back').onclick=back;
+ video.onended=back;
+ video.onerror=()=>{status.hidden=false;status.textContent=t('영상을 불러오지 못했습니다. 로비로 돌아가 다시 시도하세요.','Could not load the video. Return to the lobby and try again.');};
+ gameHandle={dispose(){disposed=true;video.onended=null;video.onerror=null;video.pause();video.removeAttribute('src');video.load();}};
+ host.querySelector('.game-back').focus({preventScroll:true});
+ video.play().catch(()=>{if(disposed||video.error)return;status.hidden=false;status.textContent=t('재생 버튼을 눌러 영상을 시작하세요.','Press play to start the video.');});
 }
 
 function nullSectorEntry(){

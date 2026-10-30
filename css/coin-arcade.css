@@ -274,3 +274,10 @@ body.arcade-scroll-locked,body.privacy-scroll-locked{overflow:hidden}
 .plush-kind-6{--plush-color:var(--arcade-foundation-color-e4c574)}
 .plush-kind-7{--plush-color:var(--arcade-foundation-color-b6c3cd)}
 .plush-kind-8{--plush-color:var(--arcade-foundation-color-dca2a1)}
+
+/* Short film shares the lobby card and return controls. */
+.coin-arcade .untitle-card{text-align:left;color:inherit;width:100%}
+.coin-arcade .untitle-card .wf-card__title{text-transform:none}
+.arcade-film{display:grid;gap:var(--space-5)}
+.arcade-film .game-heading{flex-wrap:wrap}
+.arcade-film-video{display:block;width:100%;max-height:70dvh;aspect-ratio:16/9;object-fit:contain;background:var(--color-black,#000);border-radius:var(--radius-control)}
