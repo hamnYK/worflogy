@@ -194,11 +194,11 @@
 .null-sector-load-status{margin:0;padding:var(--space-3);font-size:var(--font-size-ui)}
 
 /* Featured lobby card composed from the homepage's existing components. */
-.coin-arcade .null-sector-card{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-3);padding:var(--space-4);color:var(--color-text)}
-.coin-arcade .null-sector-card .wf-card__title{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);margin:0;font-family:var(--font-display-en);font-size:var(--font-size-lead);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);color:var(--color-text);text-shadow:none}
-.coin-arcade .null-sector-card .null-sector-edition{font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);line-height:var(--line-height-tight);white-space:nowrap}
-.coin-arcade .null-sector-card .arcade-null-sector-play{margin-top:auto;min-height:var(--control-height-touch);font-family:var(--font-body);font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
-.coin-arcade .null-sector-card .arcade-null-sector-play:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
+.coin-arcade .arcade-feature-card{display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-3);padding:var(--space-4);color:var(--color-text)}
+.coin-arcade .arcade-feature-card .wf-card__title{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2);margin:0;font-family:var(--font-display-en);font-size:var(--font-size-lead);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);color:var(--color-text);text-shadow:none}
+.coin-arcade .arcade-feature-card .null-sector-edition{font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);line-height:var(--line-height-tight);white-space:nowrap}
+.coin-arcade .arcade-feature-card .wf-button--primary{margin-top:auto;min-height:var(--control-height-touch);font-family:var(--font-body);font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)}
+.coin-arcade .arcade-feature-card .wf-button--primary:focus-visible{outline:var(--focus-ring);outline-offset:var(--focus-offset)}
 
 /* Pocket Plush follows the shared arcade shell and touch controls. */
 .claw-caption{position:absolute;left:var(--arcade-foundation-space-20px);top:var(--arcade-foundation-space-16px);color:var(--arcade-foundation-color-eee3c9);font:var(--arcade-font-weight-semibold) var(--arcade-foundation-type-10px) var(--font-body);letter-spacing:var(--arcade-ui-tracking-2px);pointer-events:none}
@@ -276,8 +276,7 @@ body.arcade-scroll-locked,body.privacy-scroll-locked{overflow:hidden}
 .plush-kind-8{--plush-color:var(--arcade-foundation-color-dca2a1)}
 
 /* Short film shares the lobby card and return controls. */
-.coin-arcade .untitle-card{text-align:left;color:inherit;width:100%}
-.coin-arcade .untitle-card .wf-card__title{text-transform:none}
+.coin-arcade .arcade-feature-card .wf-card__title:lang(ko){font-family:var(--font-display-ko)}
 .arcade-film{display:grid;gap:var(--space-5)}
 .arcade-film .game-heading{flex-wrap:wrap}
-.arcade-film-video{display:block;width:100%;max-height:70dvh;aspect-ratio:16/9;object-fit:contain;background:var(--color-black,#000);border-radius:var(--radius-control)}
+.arcade-film-video{display:block;width:auto;height:auto;max-width:100%;max-height:70dvh;justify-self:center;object-fit:contain;border-radius:var(--radius-control)}
