@@ -153,7 +153,7 @@ function playUntitle(){
  stopGame();inLobby=false;syncMusic();
  dialog.classList.add('arcade-playing');dialog.scrollTop=0;
  const host=dialog.querySelector('.arcade-content');
- host.innerHTML='<section class="arcade-film" aria-labelledby="arcade-film-title"><div class="game-heading"><button type="button" class="wf-button game-back">'+t('AFTER HOURS로 돌아가기','BACK TO AFTER HOURS')+'</button><h2 id="arcade-film-title" lang="ko" translate="no">만드는 중</h2></div><video class="arcade-film-video" controls playsinline preload="metadata" aria-label="만드는 중" src="./assets/videos/starhaven-promo-15s-1080p-small.mp4"></video><p class="game-status" role="status" hidden></p></section>';
+ host.innerHTML='<section class="arcade-film" aria-labelledby="arcade-film-title"><div class="game-heading"><button type="button" class="wf-button game-back">'+t('AFTER HOURS로 돌아가기','BACK TO AFTER HOURS')+'</button><h2 id="arcade-film-title" lang="ko" translate="no">만드는 중</h2></div><video class="arcade-film-video" controls playsinline preload="metadata" aria-label="만드는 중" src="./assets/videos/starhaven-promo-20s-1080p.mp4"></video><p class="game-status" role="status" hidden></p></section>';
  const video=host.querySelector('.arcade-film-video');
  const status=host.querySelector('[role="status"]');
  let disposed=false;
