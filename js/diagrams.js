@@ -39,4 +39,4 @@ window.WORFLOGY_DIAGRAMS.push({"id":"game-11","title":"장기·바둑-like 보�
 
 window.WORFLOGY_DIAGRAMS.push({"id":"game-12","title":"가제 : NULL SECTOR","category":"시맨틱 게임 콘텐츠","readiness":"개발 진행 중","technology":"bottom-up","technologyLabel":"Bottom-Up 시맨틱 디자인","video":"assets/images/hidden-bg.mp4","nodes":[],"edges":[],"desc":""});
 
-window.WORFLOGY_DIAGRAMS.push({"id":"projects-13","title":"일반 프로젝트","desc":"시맨틱 기술을 기반으로 하지 않는 프로젝트입니다.","splitImage":"assets/images/canvas-bg/canvas-13.png","panels":["제조 생산 품질 AX","가제 : Star Heaven"],"panelDescriptions":["제조 공정·품질 관리 학습 시뮬레이션",""],"nodes":[],"edges":[]});
+window.WORFLOGY_DIAGRAMS.push({"id":"projects-13","title":"일반 프로젝트","desc":"시맨틱 기술을 기반으로 하지 않는 프로젝트입니다.","splitImage":"assets/images/canvas-bg/canvas-12.png","panels":["제조 생산 품질 AX","가제 : Star Heaven"],"panelDescriptions":["제조 공정·품질 관리 학습 시뮬레이션",""],"nodes":[],"edges":[]});
