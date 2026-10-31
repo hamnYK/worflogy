@@ -1,4 +1,11 @@
 window.WORFLOGY_EN = {
+  "제조 공정·품질 관리 학습 시뮬레이션": "A learning simulation for manufacturing processes and quality management",
+  "시맨틱 게임 콘텐츠": "Semantic Game Content",
+  "일반 프로젝트": "General Projects",
+  "시맨틱 기술을 기반으로 하지 않는 프로젝트입니다.": "Projects developed without semantic technology as their foundation.",
+  "제조 생산 품질 AX": "Manufacturing, Production & Quality AX",
+  "가제 : Star Heaven": "Working title: Star Heaven",
+  "제조 생산 품질 AX / 가제 : Star Heaven": "Manufacturing, Production & Quality AX / Working title: Star Heaven",
   "AI 리스크 정책 글로벌 커뮤니티": "Global AI risk & policy community",
   "협업 온톨로지 기반 글 작성": "Collaborative ontology-based writing",
   "도슨트가 있는 개인 가상 갤러리": "Your virtual gallery with a docent",

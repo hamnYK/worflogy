@@ -67,6 +67,14 @@
         section.append(readiness);
       }
     }
+    if(diagram.splitImage){
+      const description=document.createElement('p');description.className='static-diagram-description';description.textContent=diagram.desc;
+      const shell=document.createElement('div');shell.className='diagram-shell project-showcase';
+      const headings=document.createElement('div');headings.className='project-showcase__headings';
+      diagram.panels.forEach((label,i)=>{const title=document.createElement('h3');title.id=i?'project-star-heaven':'project-smart-manufacturing';title.textContent=label;if(diagram.panelDescriptions?.[i]){const description=document.createElement('small');description.className='project-showcase__description';description.textContent=diagram.panelDescriptions[i];title.append(description);}if(i){const hint=document.createElement('span');hint.className='project-showcase__open null-sector-open';hint.setAttribute('aria-hidden','true');hint.innerHTML='<span>&#9664; | &#9654;</span><span>OPEN</span>';title.append(hint);}headings.append(title);});
+      const image=document.createElement('img');image.className='project-showcase__image';image.src=diagram.splitImage;image.alt=diagram.panels.join(' / ');image.loading='lazy';image.width=2866;image.height=1399;
+      shell.append(headings,image);section.append(description,shell);root.append(section);return;
+    }
     if(diagram.video){
       const shell=document.createElement("div");shell.className="diagram-shell";
       const toolbar=document.createElement("div");toolbar.className="toolbar";

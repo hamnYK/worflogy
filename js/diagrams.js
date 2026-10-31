@@ -35,6 +35,8 @@ Object.entries({
   window.WORFLOGY_DIAGRAMS.find(diagram=>diagram.id==="overview").nodes.find(node=>node.id===id).heritage={person,perspective};
 });
 
-window.WORFLOGY_DIAGRAMS.push({"id":"game-11","title":"장기·바둑-like 보드 게임 \"한 수 축구\"","category":"게임 콘텐츠","readiness":"플레이 가능","technologyLabel":"하이브리드 시맨틱 디자인","renderer":"football","noSubtitle":true,"nodes":[],"edges":[],"desc":"바둑·장기 LIKE 축구 보드 게임. 온톨로지 추론 - AI 학습의 상대 플레이어. 온톨로지 고도화 연구개발 중."});
+window.WORFLOGY_DIAGRAMS.push({"id":"game-11","title":"장기·바둑-like 보드 게임 \"한 수 축구\"","category":"시맨틱 게임 콘텐츠","readiness":"플레이 가능","technologyLabel":"하이브리드 시맨틱 디자인","renderer":"football","noSubtitle":true,"nodes":[],"edges":[],"desc":"바둑·장기 LIKE 축구 보드 게임. 온톨로지 추론 - AI 학습의 상대 플레이어. 온톨로지 고도화 연구개발 중."});
 
-window.WORFLOGY_DIAGRAMS.push({"id":"game-12","title":"가제 : NULL SECTOR","category":"게임 콘텐츠","readiness":"개발 진행 중","technology":"bottom-up","technologyLabel":"Bottom-Up 시맨틱 디자인","video":"assets/images/hidden-bg.mp4","nodes":[],"edges":[],"desc":""});
+window.WORFLOGY_DIAGRAMS.push({"id":"game-12","title":"가제 : NULL SECTOR","category":"시맨틱 게임 콘텐츠","readiness":"개발 진행 중","technology":"bottom-up","technologyLabel":"Bottom-Up 시맨틱 디자인","video":"assets/images/hidden-bg.mp4","nodes":[],"edges":[],"desc":""});
+
+window.WORFLOGY_DIAGRAMS.push({"id":"projects-13","title":"일반 프로젝트","desc":"시맨틱 기술을 기반으로 하지 않는 프로젝트입니다.","splitImage":"assets/images/canvas-bg/canvas-13.png","panels":["제조 생산 품질 AX","가제 : Star Heaven"],"panelDescriptions":["제조 공정·품질 관리 학습 시뮬레이션",""],"nodes":[],"edges":[]});

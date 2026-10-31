@@ -142,7 +142,7 @@ function lobby(){
  dialog.querySelector('.arcade-null-sector-play').onclick=nullSectorEntry;
  dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card wf-card--glass wf-card--compact claw-card"><h2 class="wf-card__title" lang="en">POCKET PLUSH</h2><button type="button" class="wf-card__action arcade-claw-play"><span aria-hidden="true">&#9654;</span> PLAY</button></div>');
  dialog.querySelector('.arcade-claw-play').onclick=()=>start('claw');
- dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card arcade-feature-card untitle-card"><h2 class="wf-card__title" lang="ko" translate="no">만드는 중</h2><button type="button" class="wf-button wf-button--primary arcade-untitle-play" aria-label="만드는 중 영상 재생">PLAY</button></div>');
+ dialog.querySelector('.arcade-cards').insertAdjacentHTML('beforeend','<div class="wf-card arcade-feature-card untitle-card"><h2 class="wf-card__title" lang="en" translate="no"><span>Star Heaven</span><span class="wf-badge wf-badge--neutral">VIDEO</span></h2><button type="button" class="wf-button wf-button--primary arcade-untitle-play" aria-label="Star Heaven 영상 재생">PLAY</button></div>');
  dialog.querySelector('.arcade-untitle-play').onclick=playUntitle;
  dialog.querySelector('.arcade-play').onclick=()=>start('football');
  dialog.querySelector('.arcade-basketball-play').onclick=()=>start('basketball');
@@ -153,7 +153,7 @@ function playUntitle(){
  stopGame();inLobby=false;syncMusic();
  dialog.classList.add('arcade-playing');dialog.scrollTop=0;
  const host=dialog.querySelector('.arcade-content');
- host.innerHTML='<section class="arcade-film" aria-labelledby="arcade-film-title"><div class="game-heading"><button type="button" class="wf-button game-back">'+t('AFTER HOURS로 돌아가기','BACK TO AFTER HOURS')+'</button><h2 id="arcade-film-title" lang="ko" translate="no">만드는 중</h2></div><video class="arcade-film-video" controls playsinline preload="metadata" aria-label="만드는 중" src="./assets/videos/starhaven-promo-20s-1080p-5eef85d779f1.mp4"></video><p class="game-status" role="status" hidden></p></section>';
+ host.innerHTML='<section class="arcade-film" aria-labelledby="arcade-film-title"><div class="game-heading"><button type="button" class="wf-button game-back">'+t('AFTER HOURS로 돌아가기','BACK TO AFTER HOURS')+'</button><h2 id="arcade-film-title" lang="en" translate="no">Star Heaven</h2></div><video class="arcade-film-video" controls playsinline preload="metadata" aria-label="Star Heaven" src="./assets/videos/starhaven-promo-20s-1080p-5eef85d779f1.mp4"></video><p class="game-status" role="status" hidden></p></section>';
  const video=host.querySelector('.arcade-film-video');
  const status=host.querySelector('[role="status"]');
  let disposed=false;

@@ -109,3 +109,26 @@ textarea.wf-input {min-height:var(--ui-size-100px);resize:vertical}
 
 .diagram-input-canvas{pointer-events:auto;touch-action:none}.diagram-input-canvas.diagram-touch-scroll{pointer-events:none!important;touch-action:auto!important}
 .canvas-heritage .canvas-heritage__label{transform:translate(var(--label-x),var(--label-y));width:max(var(--diagram-label-min-width),calc(var(--diagram-label-width) * var(--label-zoom)));font-size:max(var(--diagram-label-min-font-size),calc(var(--diagram-label-font-size) * var(--label-zoom)));opacity:var(--label-opacity)}
+
+/* Two equal project panels use the supplied composite image without cropping. */
+.project-showcase{position:relative;isolation:isolate;overflow:hidden}
+.project-showcase__headings{position:absolute;z-index:var(--project-showcase-label-layer);inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;pointer-events:none}
+.project-showcase__headings h3{position:relative;justify-self:center;max-width:calc(100% - var(--space-4));margin:0;padding:var(--space-2) var(--space-3);border-radius:var(--radius-card);background:var(--color-overlay);color:var(--color-white);font-size:clamp(var(--font-size-ui),2.4vw,var(--font-size-heading));font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);text-align:center;scroll-margin-top:var(--space-8);word-break:keep-all;overflow-wrap:anywhere;text-shadow:var(--shadow-media-text)}
+.project-showcase__headings #project-smart-manufacturing{color:var(--color-text);background:var(--project-showcase-light-surface);font-weight:var(--font-weight-bold);text-shadow:none}
+.project-showcase__image{display:block;width:100%;height:auto}
+
+.project-showcase__open{display:flex;flex-direction:column;gap:var(--space-1);font-family:var(--font-body);font-size:var(--font-size-ui);font-weight:var(--font-weight-medium);line-height:var(--line-height-tight);letter-spacing:0;position:absolute;top:calc(100% + var(--space-3));left:0;width:100%;color:var(--color-on-media);text-shadow:var(--shadow-media-text);-webkit-text-stroke:var(--media-text-stroke);paint-order:stroke fill}
+
+.project-showcase__description{display:block;margin-top:var(--space-2);font-family:var(--font-body);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);line-height:var(--line-height-body)}
+
+/* Subtle ambient effects remain below labels and never intercept input. */
+.project-showcase::before,.project-showcase::after{content:"";position:absolute;top:0;bottom:0;width:50%;z-index:var(--project-showcase-effect-layer);pointer-events:none}
+.project-showcase::before{left:0;background:var(--project-showcase-scan-gradient);background-size:100% 220%;background-position:0 50%;animation:project-process-flow var(--project-showcase-scan-duration) var(--ease-standard) infinite alternate}
+.project-showcase::after{right:0;background:var(--project-showcase-particles-gradient);opacity:var(--project-showcase-particles-base);animation:project-star-drift var(--project-showcase-particles-duration) var(--ease-standard) infinite}
+@keyframes project-process-flow{from{background-position:0 20%;opacity:var(--project-showcase-scan-min)}to{background-position:0 80%;opacity:var(--project-showcase-scan-max)}}
+@keyframes project-star-drift{0%,100%{transform:translateY(var(--space-6));opacity:var(--project-showcase-particles-min)}50%{transform:translateY(calc(-1 * var(--space-6)));opacity:var(--project-showcase-particles-max)}}
+@media(max-width:760px),(prefers-reduced-motion:reduce){.project-showcase::before,.project-showcase::after{animation:none;transform:none}.project-showcase::before{background-position:0 50%;opacity:var(--project-showcase-scan-static)}.project-showcase::after{opacity:var(--project-showcase-particles-static)}}
+@media(forced-colors:active){.project-showcase::before,.project-showcase::after{display:none}}
+
+@media(max-width:760px){.project-showcase__image{height:var(--project-showcase-mobile-height);object-fit:cover;object-position:center}.project-showcase__headings{grid-template-rows:minmax(0,1fr)}}
+@media(prefers-reduced-transparency:reduce){.project-showcase__headings h3{background:var(--color-charcoal)}.project-showcase__headings #project-smart-manufacturing{background:var(--color-surface)}}

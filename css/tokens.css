@@ -268,3 +268,22 @@
   --ui-space-negative-4px: -4px;
   --ui-size-200px: 200px;
 }
+
+/* Shared project showcase: surface, layers, responsive height and ambient motion. */
+:root {
+  --project-showcase-scan-gradient: linear-gradient(0deg,transparent 35%,color-mix(in srgb,var(--color-sky) 8%,transparent) 44%,color-mix(in srgb,var(--color-sky) 40%,transparent) 49.5%,color-mix(in srgb,var(--color-white) 55%,transparent) 50%,color-mix(in srgb,var(--color-sky) 40%,transparent) 50.5%,color-mix(in srgb,var(--color-sky) 8%,transparent) 56%,transparent 65%);
+  --project-showcase-particles-gradient: radial-gradient(circle at 12% 22%,var(--color-white) 0 2px,color-mix(in srgb,var(--color-sky) 40%,transparent) 3px,transparent 8px),radial-gradient(circle at 27% 71%,var(--color-sky) 0 2px,color-mix(in srgb,var(--color-sky) 32%,transparent) 4px,transparent 9px),radial-gradient(circle at 39% 12%,var(--color-white) 0 2px,color-mix(in srgb,var(--color-sky) 40%,transparent) 3px,transparent 8px),radial-gradient(circle at 66% 32%,var(--color-sky) 0 2px,color-mix(in srgb,var(--color-sky) 32%,transparent) 4px,transparent 9px),radial-gradient(circle at 79% 79%,var(--color-white) 0 2px,color-mix(in srgb,var(--color-sky) 40%,transparent) 3px,transparent 8px),radial-gradient(circle at 90% 47%,var(--color-sky) 0 2px,color-mix(in srgb,var(--color-sky) 32%,transparent) 4px,transparent 9px),radial-gradient(circle at 52% 89%,var(--color-white) 0 2px,color-mix(in srgb,var(--color-sky) 40%,transparent) 3px,transparent 8px);
+  --project-showcase-scan-duration: 6s;
+  --project-showcase-particles-duration: 5s;
+  --project-showcase-label-layer: 2;
+  --project-showcase-effect-layer: 1;
+  --project-showcase-light-surface: var(--worf-foundation-color-rgba-255-255-255-0-75);
+  --project-showcase-particles-base: .85;
+  --project-showcase-scan-min: .65;
+  --project-showcase-scan-max: .8;
+  --project-showcase-particles-min: .4;
+  --project-showcase-particles-max: .75;
+  --project-showcase-scan-static: .3;
+  --project-showcase-particles-static: .45;
+  --project-showcase-mobile-height: 320px;
+}
